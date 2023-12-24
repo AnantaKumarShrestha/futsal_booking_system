@@ -1,5 +1,6 @@
 package com.intern.futsalBookingSystem.model;
 
+import com.intern.futsalBookingSystem.encryption.EncryptorDecryptor;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,9 +23,11 @@ public class FutsalOwnerModel {
     private String lastName;
 
     @Column(nullable = false, length = 50)
+    @Convert(converter = EncryptorDecryptor.class)
     private String username;
 
     @Column(nullable = false, length = 50)
+    @Convert(converter = EncryptorDecryptor.class)
     private String password;
 
     @Column(nullable = false, length = 50)
