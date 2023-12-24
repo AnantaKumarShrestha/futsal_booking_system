@@ -1,5 +1,6 @@
 package com.intern.futsalBookingSystem.model;
 
+import com.intern.futsalBookingSystem.encryption.EncryptorDecryptor;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,9 +25,11 @@ public class UserModel {
     private int age;
 
     @Column(nullable = false)
+    @Convert(converter = EncryptorDecryptor.class)
     private String email;
 
     @Column(nullable = false, length = 50)
+    @Convert(converter = EncryptorDecryptor.class)
     private String password;
 
     @Column(nullable = false, length = 50)

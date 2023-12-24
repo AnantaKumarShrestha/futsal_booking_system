@@ -1,6 +1,7 @@
 package com.intern.futsalBookingSystem.model;
 
 
+import com.intern.futsalBookingSystem.encryption.EncryptorDecryptor;
 import com.intern.futsalBookingSystem.enums.Gender;
 import com.intern.futsalBookingSystem.enums.Role;
 import jakarta.persistence.*;
@@ -36,9 +37,11 @@ public class AdminModel {
     private String gmail;
 
     @Column(nullable = false, length = 120)
+    @Convert(converter = EncryptorDecryptor.class)
     private String username;
 
     @Column(nullable = false, length = 120)
+    @Convert(converter = EncryptorDecryptor.class)
     private String password;
 
     @Enumerated(EnumType.STRING)
