@@ -90,6 +90,10 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
         FutsalOwnerModel futsalOwner = futsalOwnerRepo.getFutsalOwnerById(futsalOwnerId).orElseThrow(() -> new ResourceNotFoundException("Futsal Owner not found"));
         FutsalModel futsal=futsalRepo.findById(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal Not Found Exception"));
 
+        if(!futsal.isRegistered()){
+            throw new ResourceNotFoundException("Not Registered");
+        }
+
         LocalDateTime now = LocalDateTime.now();
 
         double dailyTurnover = calculateTurnoverForPeriod(futsalId, now.minusDays(1), now);
@@ -103,7 +107,11 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
 
     @Override
     public List<SlotDto> getOwnFutsalSlots(UUID futsalId) {
+
         FutsalModel futsal=futsalRepo.getFutsalById(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal Not found"));
+        if(!futsal.isRegistered()){
+            throw new ResourceNotFoundException("Not Registered");
+        }
         List<SlotModel> slotList=futsal.getSlots();
         return SlotMapper.INSTANCE.slotModelListIntoSlotDtoList(slotList);
     }

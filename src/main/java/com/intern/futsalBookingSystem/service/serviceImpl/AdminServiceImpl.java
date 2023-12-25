@@ -63,7 +63,7 @@ public class AdminServiceImpl implements AdminService {
     public FutsalListDto approveFutsalRegistrationRequest(UUID futsalId) {
         FutsalModel futsalRequest = futsalRepo.findById(futsalId).orElseThrow(() -> new ResourceNotFoundException("Futsal Registration Request not found"));
         futsalRequest.setRegistered(true);
-        return FutsalListMapper.INSTANCE.futsalModelIntoFutsalListDto(futsalRequest);
+        return FutsalListMapper.INSTANCE.futsalModelIntoFutsalListDto(futsalRepo.save(futsalRequest));
     }
 
     @Override
