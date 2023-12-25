@@ -16,6 +16,6 @@ public interface SlotRepo extends JpaRepository<SlotModel, UUID> {
     @Query(name = "findAllByBookedByUserId")
     List<SlotModel> findAllByBookedByUserId(@Param("userId") UUID userId);
 
-   @Query(name = "getSlotById")
+     @Query(name = "getSlotById")
     Optional<SlotModel> getSlotById(@Param("slotId") UUID slotId);
 }

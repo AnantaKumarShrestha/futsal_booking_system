@@ -1,13 +1,14 @@
 package com.intern.futsalBookingSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@NamedQuery(name = "findAllByBookedByUserId", query = "SELECT s FROM Slot s WHERE s.bookedByUser.id = :userId")
-@NamedQuery(name = "getSlotById", query = "SELECT s FROM Slot s WHERE s.id = :slotId")
+@NamedQuery(name = "findAllByBookedByUserId", query = "SELECT s FROM SlotModel s WHERE s.bookedByUser.id = :userId")
+@NamedQuery(name = "getSlotById", query = "SELECT s FROM SlotModel s WHERE s.id = :slotId")
 @Data
 @Entity
 public class SlotModel {
@@ -17,6 +18,7 @@ public class SlotModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+//    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private UserModel bookedByUser;
 

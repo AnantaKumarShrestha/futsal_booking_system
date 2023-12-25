@@ -16,7 +16,7 @@ import java.util.UUID;
 public interface FutsalRepo extends JpaRepository<FutsalModel, UUID> {
 
 
-    @Query("SELECT s FROM Futsal f JOIN f.slots s WHERE s.completed = true AND s.isBooked = true AND f.id = :futsalId AND s.startTime BETWEEN :startDate AND :endDate")
+    @Query("SELECT s FROM FutsalModel f JOIN f.slots s WHERE s.completed = true AND s.isBooked = true AND f.id = :futsalId AND s.startTime BETWEEN :startDate AND :endDate")
     List<SlotModel> findCompletedAndBookedSlotsForFutsal(
             @Param("futsalId") UUID futsalId,
             @Param("startDate") LocalDateTime startDate,
