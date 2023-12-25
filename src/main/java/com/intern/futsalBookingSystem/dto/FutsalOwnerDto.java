@@ -30,6 +30,6 @@ public class FutsalOwnerDto {
 
     private String phoneNumber;
 
-    private List<FutsalModel> futsals;
+  //  private List<FutsalModel> futsals;
 
 }
