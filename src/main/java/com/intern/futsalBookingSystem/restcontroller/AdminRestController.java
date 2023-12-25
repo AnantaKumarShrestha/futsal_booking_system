@@ -1,9 +1,6 @@
 package com.intern.futsalBookingSystem.restcontroller;
 
-import com.intern.futsalBookingSystem.dto.AdminDto;
-import com.intern.futsalBookingSystem.dto.FutsalListDto;
-import com.intern.futsalBookingSystem.dto.FutsalOwnerDto;
-import com.intern.futsalBookingSystem.dto.UserDto;
+import com.intern.futsalBookingSystem.dto.*;
 import com.intern.futsalBookingSystem.enums.Status;
 import com.intern.futsalBookingSystem.payload.ApiResponse;
 import com.intern.futsalBookingSystem.service.AdminService;
@@ -43,7 +40,7 @@ public class AdminRestController {
     }
 
     @GetMapping("/admin/users")
-    public List<UserDto> getAllUsers(){
+    public List<UserListDto> getAllUsers(){
         return adminService.getAllUsers();
     }
 

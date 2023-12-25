@@ -5,10 +5,7 @@ import com.intern.futsalBookingSystem.db.AdminRepo;
 import com.intern.futsalBookingSystem.db.FutsalOwnerRepo;
 import com.intern.futsalBookingSystem.db.FutsalRepo;
 import com.intern.futsalBookingSystem.db.UserRepo;
-import com.intern.futsalBookingSystem.dto.AdminDto;
-import com.intern.futsalBookingSystem.dto.FutsalListDto;
-import com.intern.futsalBookingSystem.dto.FutsalOwnerDto;
-import com.intern.futsalBookingSystem.dto.UserDto;
+import com.intern.futsalBookingSystem.dto.*;
 import com.intern.futsalBookingSystem.exception.ResourceNotFoundException;
 import com.intern.futsalBookingSystem.mapper.*;
 import com.intern.futsalBookingSystem.model.AdminModel;
@@ -73,9 +70,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<UserDto> getAllUsers() {
+    public List<UserListDto> getAllUsers() {
         List<UserModel> userList=userRepo.findAll();
-        return UserMapper.INSTANCE.userModelListIntoUserDtoList(userList);
+        return UserMapper.INSTANCE.userModelListIntoUserListDtoList(userList);
     }
 
     @Override
