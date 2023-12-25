@@ -6,6 +6,8 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@NamedQuery(name = "findAllByBookedByUserId", query = "SELECT s FROM Slot s WHERE s.bookedByUser.id = :userId")
+@NamedQuery(name = "getSlotById", query = "SELECT s FROM Slot s WHERE s.id = :slotId")
 @Data
 @Entity
 public class SlotModel {

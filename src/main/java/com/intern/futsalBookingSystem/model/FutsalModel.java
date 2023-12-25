@@ -6,6 +6,8 @@ import lombok.Data;
 import java.util.List;
 import java.util.UUID;
 
+@NamedQuery(name = "getFutsalById", query = "SELECT f FROM Futsal f WHERE f.id = :futsalId")
+@NamedQuery(name = "getAllFutsal",query = "SELECT f FROM Futsal f")
 @Data
 @Entity
 public class FutsalModel {
