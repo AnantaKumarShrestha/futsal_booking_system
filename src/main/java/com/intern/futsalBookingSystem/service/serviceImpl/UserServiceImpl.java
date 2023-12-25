@@ -98,9 +98,6 @@ public class UserServiceImpl implements UserService {
     public SlotDto cancelBooking(UUID slotId) {
 
         SlotModel slot = slotRepo.getSlotById(slotId).orElseThrow(()->new ResourceNotFoundException("Slot not found"));
-        if (slot.isBooked()) {
-            throw new ResourceNotFoundException("Slot is already booked");
-        }
 
         slot.setBookedByUser(null);
         slot.setBooked(false);

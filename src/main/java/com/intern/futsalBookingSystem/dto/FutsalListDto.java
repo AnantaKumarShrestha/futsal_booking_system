@@ -1,5 +1,6 @@
 package com.intern.futsalBookingSystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.intern.futsalBookingSystem.model.FutsalOwnerModel;
 import com.intern.futsalBookingSystem.model.SlotModel;
 import lombok.Data;
@@ -19,7 +20,7 @@ public class FutsalListDto {
 
     private String futsalDescription;
 
-
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private FutsalOwnerModel futsalOwner;
 
     private boolean isRegistered;
