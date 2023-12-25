@@ -17,6 +17,6 @@ public interface FutsalOwnerMapper {
 
     FutsalOwnerDto futsalOwnerDtoIntoFutsalOwnerModel(FutsalOwnerModel futsalOwnerModel);
 
-    List<FutsalOwnerDto> futsalOwnerListIntoFutsalOwnerDtoList(List<FutsalModel> futsalModels);
+    List<FutsalOwnerDto> futsalOwnerListIntoFutsalOwnerDtoList(List<FutsalOwnerModel> futsalOwnerList);
 
 }
