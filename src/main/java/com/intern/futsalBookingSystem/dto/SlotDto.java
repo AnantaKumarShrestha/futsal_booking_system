@@ -1,5 +1,6 @@
 package com.intern.futsalBookingSystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -12,7 +13,8 @@ public class SlotDto {
 
     private UUID id;
 
-    private UserDto bookedByUser;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private UserListDto bookedByUser;
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;

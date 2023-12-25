@@ -18,7 +18,7 @@ public interface AdminService {
 
    void rejectFutsalRegistrationRequest(UUID futsalId);
 
-   List<UserDto> getAllUsers();
+   List<UserListDto> getAllUsers();
 
    void removeFutsal(UUID futsalId);
 

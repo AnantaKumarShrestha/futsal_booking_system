@@ -18,7 +18,7 @@ public interface UserService {
 
     List<SlotsListDto> getAllSlotsOfFutsal(UUID futsalId);
 
-    List<SlotDto> getAvailableSLotsOfFutsal(UUID futsalId);
+    List<SlotsListDto> getAvailableSLotsOfFutsal(UUID futsalId);
 
     List<SlotsListDto> getUnavailableSlotsOfFutsal(UUID futsalId);
 
