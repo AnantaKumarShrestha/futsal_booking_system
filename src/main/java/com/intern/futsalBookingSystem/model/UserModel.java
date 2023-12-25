@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.util.UUID;
 
+@NamedQuery(name = "getUserById", query = "SELECT u FROM UserModel u WHERE u.id = :userId")
 @Data
 @Entity
 public class UserModel {

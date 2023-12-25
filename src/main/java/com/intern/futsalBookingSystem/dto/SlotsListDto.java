@@ -6,13 +6,11 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-public class SlotDto {
+public class SlotsListDto {
 
 
 
     private UUID id;
-
-    private UserDto bookedByUser;
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
