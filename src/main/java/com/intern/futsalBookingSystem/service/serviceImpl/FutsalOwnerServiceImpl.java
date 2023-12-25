@@ -15,6 +15,7 @@ import com.intern.futsalBookingSystem.mapper.SlotMapper;
 import com.intern.futsalBookingSystem.model.FutsalModel;
 import com.intern.futsalBookingSystem.model.FutsalOwnerModel;
 import com.intern.futsalBookingSystem.model.SlotModel;
+import com.intern.futsalBookingSystem.model.UserModel;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
 import com.intern.futsalBookingSystem.service.FutsalOwnerService;
@@ -116,6 +117,39 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
         slot.setBookedByUser(null);
         slot.setBooked(false);
         return SlotMapper.INSTANCE.slotModelIntoSlotDto(slotRepo.save(slot));
+    }
+
+    @Override
+    public SlotDto completeBooking(UUID slotId) {
+        SlotModel slot = slotRepo.getSlotById(slotId).orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
+
+        if (!slot.isCompleted()) {
+            slot.setCompleted(true);
+
+            UserModel bookedByUser = slot.getBookedByUser();
+
+            slotRepo.save(slot);
+            if (bookedByUser != null) {
+
+                String userEmail = bookedByUser.getEmail();
+
+
+//                UserModel user=slot.getBookedByUser();
+//                int reward=user.getRewardPoint();
+//                reward+=5;
+//                user.setRewardPoint(reward);
+//                userRepo.save(user);
+
+                return SlotMapper.INSTANCE.slotModelIntoSlotDto(slotRepo.save(slot));
+            } else {
+                throw new ResourceNotFoundException("No user found for the booked slot");
+            }
+        } else {
+            throw new ResourceNotFoundException("Booking is already marked as completed");
+        }
+
+
+
     }
 
     private double calculateTurnoverForPeriod(UUID futsalId, LocalDateTime start, LocalDateTime end) {

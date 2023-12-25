@@ -62,11 +62,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<SlotDto> getAvailableSLotsOfFutsal(UUID futsalId) {
+    public List<SlotsListDto> getAvailableSLotsOfFutsal(UUID futsalId) {
 
         FutsalModel futsal=futsalRepo.getFutsalById(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal Not Found"));
         List<SlotModel> slotList=futsal.getSlots().stream().filter(slot -> !slot.isBooked()).toList();
-        return SlotMapper.INSTANCE.slotModelListIntoSlotDtoList(slotList);
+        return SlotsListMapper.INSTANCE.slotModelListIntoSlotListDto(slotList);
 
     }
 

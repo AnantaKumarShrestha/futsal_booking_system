@@ -27,5 +27,7 @@ public interface FutsalOwnerService {
 
     SlotDto cancelBooking(UUID slotID);
 
+    SlotDto completeBooking(UUID slotId);
+
 
 }
