@@ -13,6 +13,7 @@ import com.intern.futsalBookingSystem.model.FutsalModel;
 import com.intern.futsalBookingSystem.model.FutsalOwnerModel;
 import com.intern.futsalBookingSystem.model.UserModel;
 import com.intern.futsalBookingSystem.service.AdminService;
+import com.intern.futsalBookingSystem.utils.MailUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private MailUtils mailUtils;
 
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
@@ -72,6 +76,9 @@ public class AdminServiceImpl implements AdminService {
     public FutsalListDto approveFutsalRegistrationRequest(UUID futsalId) {
         FutsalModel futsalRequest = futsalRepo.findById(futsalId).orElseThrow(() -> new ResourceNotFoundException("Futsal Registration Request not found"));
         futsalRequest.setRegistered(true);
+        FutsalOwnerModel futsalOwner=futsalOwnerRepo.findByFutsals_Id(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal owner not found"));
+        mailUtils.sendEmail(futsalOwner.getGmail(),"Futsal Booking System",futsalOwner.getFirstName()+" "+futsalOwner.getLastName()+" your futsal registration request has been approved by our company");
+        logger.info("Email send successfully");
         return FutsalListMapper.INSTANCE.futsalModelIntoFutsalListDto(futsalRepo.save(futsalRequest));
     }
 
@@ -82,6 +89,10 @@ public class AdminServiceImpl implements AdminService {
         futsalRepo.delete(futsalRequest);
         logger.info("Futsal registration request is rejected");
         logger.info("Futsal registration request is deleted from database successfully.");
+        FutsalOwnerModel futsalOwner=futsalOwnerRepo.findByFutsals_Id(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal owner not found"));
+        mailUtils.sendEmail(futsalOwner.getGmail(),"Futsal Booking System",futsalOwner.getFirstName()+" "+futsalOwner.getLastName()+" your futsal registration request has been rejected by our company");
+        logger.info("Email send successfully");
+
 
     }
 
@@ -117,9 +128,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<FutsalOwnerDto> getFutsalOwnerList() {
 
-        List<FutsalOwnerModel> futsalOwnerList=futsalOwnerRepo.findAll();
+        List<FutsalOwnerModel> futsalOwnerList = futsalOwnerRepo.findAll();
         logger.info("FutsalOwner list extracted from database successfully");
         return FutsalOwnerMapper.INSTANCE.futsalOwnerListIntoFutsalOwnerDtoList(futsalOwnerList);
 
     }
+
 }

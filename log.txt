@@ -1,0 +1,440 @@
+2023-12-26T05:12:46.711+05:45  INFO 14274 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Starting FutsalBookingSystemApplication using Java 17.0.9 with PID 14274 (/home/ananta/Downloads/officeWork/futsalBookingSystem/target/classes started by ananta in /home/ananta/Downloads/officeWork/futsalBookingSystem)
+2023-12-26T05:12:46.714+05:45  INFO 14274 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : The following 1 profile is active: "dev"
+2023-12-26T05:12:46.798+05:45  INFO 14274 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-12-26T05:12:46.798+05:45  INFO 14274 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-12-26T05:12:47.506+05:45  INFO 14274 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-26T05:12:47.570+05:45  INFO 14274 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 57 ms. Found 5 JPA repository interfaces.
+2023-12-26T05:12:48.097+05:45  INFO 14274 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2023-12-26T05:12:48.107+05:45  INFO 14274 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-26T05:12:48.108+05:45  INFO 14274 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2023-12-26T05:12:48.158+05:45  INFO 14274 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-26T05:12:48.159+05:45  INFO 14274 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1360 ms
+2023-12-26T05:12:48.320+05:45  INFO 14274 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-26T05:12:48.367+05:45  INFO 14274 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-26T05:12:48.394+05:45  INFO 14274 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-26T05:12:48.597+05:45  INFO 14274 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-26T05:12:48.627+05:45  INFO 14274 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-26T05:12:48.956+05:45  INFO 14274 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2af3bc80
+2023-12-26T05:12:48.957+05:45  INFO 14274 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-26T05:12:48.983+05:45  WARN 14274 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2023-12-26T05:12:49.939+05:45  INFO 14274 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-26T05:12:53.232+05:45  INFO 14274 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T05:12:53.443+05:45  INFO 14274 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-12-26T05:12:53.764+05:45  WARN 14274 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-26T05:12:53.986+05:45  WARN 14274 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-26T05:12:54.098+05:45  INFO 14274 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-12-26T05:12:54.122+05:45  INFO 14274 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2023-12-26T05:12:54.133+05:45  INFO 14274 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Started FutsalBookingSystemApplication in 7.939 seconds (process running for 8.643)
+2023-12-26T05:17:11.826+05:45  INFO 14274 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T05:17:11.829+05:45  INFO 14274 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-26T05:17:11.840+05:45  INFO 14274 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-26T05:17:15.189+05:45  INFO 14557 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Starting FutsalBookingSystemApplication using Java 17.0.9 with PID 14557 (/home/ananta/Downloads/officeWork/futsalBookingSystem/target/classes started by ananta in /home/ananta/Downloads/officeWork/futsalBookingSystem)
+2023-12-26T05:17:15.191+05:45  INFO 14557 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : The following 1 profile is active: "dev"
+2023-12-26T05:17:15.256+05:45  INFO 14557 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-12-26T05:17:15.256+05:45  INFO 14557 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-12-26T05:17:15.918+05:45  INFO 14557 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-26T05:17:15.979+05:45  INFO 14557 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 54 ms. Found 5 JPA repository interfaces.
+2023-12-26T05:17:16.463+05:45  INFO 14557 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2023-12-26T05:17:16.472+05:45  INFO 14557 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-26T05:17:16.473+05:45  INFO 14557 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2023-12-26T05:17:16.510+05:45  INFO 14557 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-26T05:17:16.510+05:45  INFO 14557 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1253 ms
+2023-12-26T05:17:16.634+05:45  INFO 14557 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-26T05:17:16.668+05:45  INFO 14557 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-26T05:17:16.702+05:45  INFO 14557 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-26T05:17:16.872+05:45  INFO 14557 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-26T05:17:16.904+05:45  INFO 14557 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-26T05:17:17.208+05:45  INFO 14557 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@671997d6
+2023-12-26T05:17:17.209+05:45  INFO 14557 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-26T05:17:17.233+05:45  WARN 14557 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2023-12-26T05:17:18.177+05:45  INFO 14557 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-26T05:17:20.033+05:45  INFO 14557 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T05:17:20.241+05:45  INFO 14557 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-12-26T05:17:20.528+05:45  WARN 14557 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-26T05:17:20.730+05:45  WARN 14557 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-26T05:17:20.827+05:45  INFO 14557 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-12-26T05:17:20.849+05:45  INFO 14557 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2023-12-26T05:17:20.860+05:45  INFO 14557 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Started FutsalBookingSystemApplication in 6.101 seconds (process running for 6.536)
+2023-12-26T05:17:54.251+05:45  INFO 14557 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-26T05:17:54.251+05:45  INFO 14557 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-26T05:17:54.252+05:45  INFO 14557 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-12-26T05:17:54.520+05:45  INFO 14557 --- [http-nio-8080-exec-1] c.i.f.s.serviceImpl.UserServiceImpl      : User signed up successfully.
+2023-12-26T05:18:11.801+05:45  INFO 14557 --- [http-nio-8080-exec-3] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Owner Signed Up successfully.
+2023-12-26T05:18:33.171+05:45  INFO 14557 --- [http-nio-8080-exec-4] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal registration request send to admin successfully
+2023-12-26T05:18:50.941+05:45  INFO 14557 --- [http-nio-8080-exec-5] c.i.f.s.serviceImpl.AdminServiceImpl     : Futsal registration request list extracted from database successfully
+2023-12-26T05:18:56.623+05:45  INFO 14557 --- [http-nio-8080-exec-6] c.i.f.s.serviceImpl.AdminServiceImpl     : Registered futsal list extracted from database successfully.
+2023-12-26T05:19:12.090+05:45  INFO 14557 --- [http-nio-8080-exec-7] c.i.f.s.serviceImpl.AdminServiceImpl     : User list extracted from database successfully.
+2023-12-26T05:19:46.678+05:45  INFO 14557 --- [http-nio-8080-exec-9] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal game slots created successfully.
+2023-12-26T05:20:08.780+05:45  INFO 14557 --- [http-nio-8080-exec-10] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal game slots created successfully.
+2023-12-26T05:23:57.845+05:45  INFO 14557 --- [http-nio-8080-exec-3] c.i.f.s.serviceImpl.UserServiceImpl      : User signed up successfully.
+2023-12-26T05:26:14.430+05:45  INFO 14557 --- [http-nio-8080-exec-8] c.i.f.s.serviceImpl.UserServiceImpl      : Slot is booked by userId c6a8d328-ecfc-4f79-896a-4f8bf7f0973c
+2023-12-26T05:27:04.503+05:45  WARN 14557 --- [http-nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.util.UUID'; UUID string too large]
+2023-12-26T05:27:14.051+05:45  INFO 14557 --- [http-nio-8080-exec-4] c.i.f.s.serviceImpl.UserServiceImpl      : Futsal game slot canceled successfully.
+2023-12-26T05:27:35.595+05:45 ERROR 14557 --- [http-nio-8080-exec-5] c.i.f.s.s.FutsalOwnerServiceImpl         : User not found Status :Fail
+2023-12-26T05:27:35.600+05:45  WARN 14557 --- [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.intern.futsalBookingSystem.exception.ResourceNotFoundException: No user found for the booked slot]
+2023-12-26T05:28:37.451+05:45  INFO 14557 --- [http-nio-8080-exec-8] c.i.f.s.serviceImpl.UserServiceImpl      : Slot is booked by userId c6a8d328-ecfc-4f79-896a-4f8bf7f0973c
+2023-12-26T05:28:58.671+05:45 ERROR 14557 --- [http-nio-8080-exec-9] c.i.f.s.s.FutsalOwnerServiceImpl         : Booking is already marked as completed Status :Fail
+2023-12-26T05:28:58.673+05:45  WARN 14557 --- [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.intern.futsalBookingSystem.exception.ResourceNotFoundException: Booking is already marked as completed]
+2023-12-26T05:30:04.923+05:45  INFO 14557 --- [http-nio-8080-exec-1] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T05:30:04.928+05:45  INFO 14557 --- [http-nio-8080-exec-1] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T05:30:04.931+05:45  INFO 14557 --- [http-nio-8080-exec-1] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:05:25.560+05:45  INFO 14557 --- [http-nio-8080-exec-5] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:05:25.564+05:45  INFO 14557 --- [http-nio-8080-exec-5] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:05:25.566+05:45  INFO 14557 --- [http-nio-8080-exec-5] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:05:47.378+05:45  INFO 14557 --- [http-nio-8080-exec-6] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:05:47.382+05:45  INFO 14557 --- [http-nio-8080-exec-6] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:05:47.385+05:45  INFO 14557 --- [http-nio-8080-exec-6] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:07:12.184+05:45  INFO 14557 --- [http-nio-8080-exec-9] c.i.f.s.serviceImpl.UserServiceImpl      : Futsal list extracted from database successfully.
+2023-12-26T06:07:41.696+05:45  INFO 14557 --- [http-nio-8080-exec-10] c.i.f.s.serviceImpl.UserServiceImpl      : Futsal-game-Slots extracted successfully.
+2023-12-26T06:08:18.128+05:45  WARN 14557 --- [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.util.UUID'; UUID string too large]
+2023-12-26T06:08:22.972+05:45 ERROR 14557 --- [http-nio-8080-exec-3] c.i.f.s.serviceImpl.UserServiceImpl      : Slot is already booked Status : Fail
+2023-12-26T06:08:22.973+05:45  WARN 14557 --- [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.intern.futsalBookingSystem.exception.ResourceNotFoundException: Slot is already booked]
+2023-12-26T06:09:32.052+05:45 ERROR 14557 --- [http-nio-8080-exec-6] c.i.f.s.s.FutsalOwnerServiceImpl         : Booking is already marked as completed Status :Fail
+2023-12-26T06:09:32.053+05:45  WARN 14557 --- [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.intern.futsalBookingSystem.exception.ResourceNotFoundException: Booking is already marked as completed]
+2023-12-26T06:09:54.686+05:45  INFO 14557 --- [http-nio-8080-exec-7] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:09:54.691+05:45  INFO 14557 --- [http-nio-8080-exec-7] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:09:54.694+05:45  INFO 14557 --- [http-nio-8080-exec-7] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:09:55.955+05:45  INFO 14557 --- [http-nio-8080-exec-8] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:09:55.959+05:45  INFO 14557 --- [http-nio-8080-exec-8] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:09:55.962+05:45  INFO 14557 --- [http-nio-8080-exec-8] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:09:56.294+05:45  INFO 14557 --- [http-nio-8080-exec-9] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:09:56.297+05:45  INFO 14557 --- [http-nio-8080-exec-9] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:09:56.298+05:45  INFO 14557 --- [http-nio-8080-exec-9] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:09:56.734+05:45  INFO 14557 --- [http-nio-8080-exec-10] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:09:56.738+05:45  INFO 14557 --- [http-nio-8080-exec-10] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:09:56.742+05:45  INFO 14557 --- [http-nio-8080-exec-10] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:09:57.109+05:45  INFO 14557 --- [http-nio-8080-exec-2] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:09:57.112+05:45  INFO 14557 --- [http-nio-8080-exec-2] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:09:57.114+05:45  INFO 14557 --- [http-nio-8080-exec-2] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:09:57.768+05:45  INFO 14557 --- [http-nio-8080-exec-1] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:09:57.773+05:45  INFO 14557 --- [http-nio-8080-exec-1] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:09:57.775+05:45  INFO 14557 --- [http-nio-8080-exec-1] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:09:59.846+05:45  INFO 14557 --- [http-nio-8080-exec-3] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:09:59.849+05:45  INFO 14557 --- [http-nio-8080-exec-3] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:09:59.850+05:45  INFO 14557 --- [http-nio-8080-exec-3] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:10:00.268+05:45  INFO 14557 --- [http-nio-8080-exec-4] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:10:00.271+05:45  INFO 14557 --- [http-nio-8080-exec-4] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:10:00.273+05:45  INFO 14557 --- [http-nio-8080-exec-4] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:10:01.170+05:45  INFO 14557 --- [http-nio-8080-exec-5] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:10:01.172+05:45  INFO 14557 --- [http-nio-8080-exec-5] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:10:01.174+05:45  INFO 14557 --- [http-nio-8080-exec-5] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:10:53.583+05:45  INFO 14557 --- [http-nio-8080-exec-6] c.i.f.s.serviceImpl.AdminServiceImpl     : User list extracted from database successfully.
+2023-12-26T06:17:50.613+05:45  WARN 14557 --- [http-nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.util.UUID'; UUID string too large]
+2023-12-26T06:17:58.572+05:45  WARN 14557 --- [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.util.UUID'; UUID string too large]
+2023-12-26T06:18:32.719+05:45  WARN 14557 --- [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.intern.futsalBookingSystem.exception.ResourceNotFoundException: User NOt Found]
+2023-12-26T06:18:42.238+05:45  INFO 14557 --- [http-nio-8080-exec-4] c.i.f.s.serviceImpl.UserServiceImpl      : User signed up successfully.
+2023-12-26T06:19:01.021+05:45  INFO 14557 --- [http-nio-8080-exec-5] c.i.f.s.serviceImpl.UserServiceImpl      : Slot is booked by userId b52878f7-b13c-4a97-b507-57ec80d91315
+2023-12-26T06:19:37.374+05:45  INFO 14557 --- [http-nio-8080-exec-7] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:19:37.381+05:45  INFO 14557 --- [http-nio-8080-exec-7] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:19:37.384+05:45  INFO 14557 --- [http-nio-8080-exec-7] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:19:38.786+05:45  INFO 14557 --- [http-nio-8080-exec-8] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:19:38.791+05:45  INFO 14557 --- [http-nio-8080-exec-8] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:19:38.793+05:45  INFO 14557 --- [http-nio-8080-exec-8] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:20:09.852+05:45  INFO 14557 --- [http-nio-8080-exec-9] c.i.f.s.serviceImpl.AdminServiceImpl     : User list extracted from database successfully.
+2023-12-26T06:24:59.408+05:45  INFO 14557 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T06:24:59.411+05:45  INFO 14557 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-26T06:24:59.417+05:45  INFO 14557 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-26T06:25:02.984+05:45  INFO 17368 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Starting FutsalBookingSystemApplication using Java 17.0.9 with PID 17368 (/home/ananta/Downloads/officeWork/futsalBookingSystem/target/classes started by ananta in /home/ananta/Downloads/officeWork/futsalBookingSystem)
+2023-12-26T06:25:02.987+05:45  INFO 17368 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : The following 1 profile is active: "dev"
+2023-12-26T06:25:03.053+05:45  INFO 17368 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-12-26T06:25:03.053+05:45  INFO 17368 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-12-26T06:25:03.750+05:45  INFO 17368 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-26T06:25:03.814+05:45  INFO 17368 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 5 JPA repository interfaces.
+2023-12-26T06:25:04.277+05:45  INFO 17368 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2023-12-26T06:25:04.286+05:45  INFO 17368 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-26T06:25:04.287+05:45  INFO 17368 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2023-12-26T06:25:04.324+05:45  INFO 17368 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-26T06:25:04.324+05:45  INFO 17368 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1270 ms
+2023-12-26T06:25:04.444+05:45  INFO 17368 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-26T06:25:04.478+05:45  INFO 17368 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-26T06:25:04.507+05:45  INFO 17368 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-26T06:25:04.694+05:45  INFO 17368 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-26T06:25:04.717+05:45  INFO 17368 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-26T06:25:04.935+05:45  INFO 17368 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@671997d6
+2023-12-26T06:25:04.937+05:45  INFO 17368 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-26T06:25:04.956+05:45  WARN 17368 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2023-12-26T06:25:05.883+05:45  INFO 17368 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-26T06:25:08.582+05:45  INFO 17368 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T06:25:08.813+05:45  INFO 17368 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-12-26T06:25:09.095+05:45  WARN 17368 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-26T06:25:09.306+05:45  WARN 17368 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-26T06:25:09.406+05:45  INFO 17368 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-12-26T06:25:09.428+05:45  INFO 17368 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2023-12-26T06:25:09.437+05:45  INFO 17368 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Started FutsalBookingSystemApplication in 6.887 seconds (process running for 7.535)
+2023-12-26T06:25:48.327+05:45  INFO 17368 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-26T06:25:48.327+05:45  INFO 17368 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-26T06:25:48.329+05:45  INFO 17368 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-12-26T06:25:48.527+05:45  WARN 17368 --- [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.intern.futsalBookingSystem.exception.ResourceNotFoundException: Futsal Not found]
+2023-12-26T06:25:57.603+05:45  INFO 17368 --- [http-nio-8080-exec-2] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Owner Signed Up successfully.
+2023-12-26T06:26:12.935+05:45  INFO 17368 --- [http-nio-8080-exec-4] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal registration request send to admin successfully
+2023-12-26T06:26:29.182+05:45 ERROR 17368 --- [http-nio-8080-exec-5] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal not registered (futsal id : 4074b744-6a39-46e3-a758-be9a3c02dcc0)Status : Fail
+2023-12-26T06:26:29.183+05:45  WARN 17368 --- [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.intern.futsalBookingSystem.exception.ResourceNotFoundException: Not Registered]
+2023-12-26T06:26:35.478+05:45  INFO 17368 --- [http-nio-8080-exec-6] c.i.f.s.serviceImpl.AdminServiceImpl     : Admin is signed up successfully
+2023-12-26T06:26:44.559+05:45  INFO 17368 --- [http-nio-8080-exec-7] c.i.f.s.serviceImpl.AdminServiceImpl     : Registered futsal list extracted from database successfully.
+2023-12-26T06:26:48.189+05:45  INFO 17368 --- [http-nio-8080-exec-8] c.i.f.s.serviceImpl.AdminServiceImpl     : Futsal registration request list extracted from database successfully
+2023-12-26T06:27:10.266+05:45  INFO 17368 --- [http-nio-8080-exec-10] c.i.f.s.serviceImpl.AdminServiceImpl     : Registered futsal list extracted from database successfully.
+2023-12-26T06:27:25.759+05:45  INFO 17368 --- [http-nio-8080-exec-3] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal game slots created successfully.
+2023-12-26T06:27:53.852+05:45  INFO 17368 --- [http-nio-8080-exec-1] c.i.f.s.serviceImpl.UserServiceImpl      : User signed up successfully.
+2023-12-26T06:28:08.700+05:45  INFO 17368 --- [http-nio-8080-exec-2] c.i.f.s.serviceImpl.UserServiceImpl      : Slot is booked by userId 024f64d7-644c-4342-8c40-bac674830c65
+2023-12-26T06:28:54.915+05:45  WARN 17368 --- [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.intern.futsalBookingSystem.exception.ResourceNotFoundException: Futsal Owner not found]
+2023-12-26T06:29:49.090+05:45  WARN 17368 --- [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.intern.futsalBookingSystem.exception.ResourceNotFoundException: Futsal Not Found Exception]
+2023-12-26T06:29:50.717+05:45  WARN 17368 --- [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.intern.futsalBookingSystem.exception.ResourceNotFoundException: Futsal Not Found Exception]
+2023-12-26T06:30:30.765+05:45  INFO 17368 --- [http-nio-8080-exec-8] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:30:30.771+05:45  INFO 17368 --- [http-nio-8080-exec-8] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:30:30.774+05:45  INFO 17368 --- [http-nio-8080-exec-8] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:31:06.004+05:45  INFO 17368 --- [http-nio-8080-exec-9] c.i.f.s.serviceImpl.AdminServiceImpl     : User list extracted from database successfully.
+2023-12-26T06:35:03.940+05:45  INFO 17368 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T06:35:03.942+05:45  INFO 17368 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-26T06:35:03.949+05:45  INFO 17368 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-26T06:35:06.992+05:45  INFO 17704 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Starting FutsalBookingSystemApplication using Java 17.0.9 with PID 17704 (/home/ananta/Downloads/officeWork/futsalBookingSystem/target/classes started by ananta in /home/ananta/Downloads/officeWork/futsalBookingSystem)
+2023-12-26T06:35:06.995+05:45  INFO 17704 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : The following 1 profile is active: "dev"
+2023-12-26T06:35:07.061+05:45  INFO 17704 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-12-26T06:35:07.061+05:45  INFO 17704 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-12-26T06:35:07.725+05:45  INFO 17704 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-26T06:35:07.789+05:45  INFO 17704 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 57 ms. Found 5 JPA repository interfaces.
+2023-12-26T06:35:08.294+05:45  INFO 17704 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2023-12-26T06:35:08.304+05:45  INFO 17704 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-26T06:35:08.304+05:45  INFO 17704 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2023-12-26T06:35:08.350+05:45  INFO 17704 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-26T06:35:08.350+05:45  INFO 17704 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1289 ms
+2023-12-26T06:35:08.493+05:45  INFO 17704 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-26T06:35:08.544+05:45  INFO 17704 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-26T06:35:08.577+05:45  INFO 17704 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-26T06:35:08.771+05:45  INFO 17704 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-26T06:35:08.798+05:45  INFO 17704 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-26T06:35:09.085+05:45  INFO 17704 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@130bc5db
+2023-12-26T06:35:09.086+05:45  INFO 17704 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-26T06:35:09.110+05:45  WARN 17704 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2023-12-26T06:35:10.220+05:45  INFO 17704 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-26T06:35:11.453+05:45  INFO 17704 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T06:35:11.666+05:45  INFO 17704 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-12-26T06:35:11.972+05:45  WARN 17704 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-26T06:35:12.173+05:45  WARN 17704 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-26T06:35:12.271+05:45  INFO 17704 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-12-26T06:35:12.292+05:45  INFO 17704 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2023-12-26T06:35:12.301+05:45  INFO 17704 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Started FutsalBookingSystemApplication in 5.754 seconds (process running for 6.259)
+2023-12-26T06:36:19.851+05:45  INFO 17704 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-26T06:36:19.852+05:45  INFO 17704 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-26T06:36:19.853+05:45  INFO 17704 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-12-26T06:36:44.860+05:45  INFO 17704 --- [http-nio-8080-exec-4] c.i.f.s.serviceImpl.UserServiceImpl      : Slot is booked by userId 024f64d7-644c-4342-8c40-bac674830c65
+2023-12-26T06:37:06.712+05:45  INFO 17704 --- [http-nio-8080-exec-5] c.i.f.s.s.FutsalOwnerServiceImpl         : Reward point calculated successfully
+2023-12-26T06:37:25.611+05:45  INFO 17704 --- [http-nio-8080-exec-6] c.i.f.s.serviceImpl.AdminServiceImpl     : User list extracted from database successfully.
+2023-12-26T06:38:29.056+05:45  INFO 17704 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T06:38:29.059+05:45  INFO 17704 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-26T06:38:29.067+05:45  INFO 17704 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-26T06:38:31.872+05:45  INFO 17869 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Starting FutsalBookingSystemApplication using Java 17.0.9 with PID 17869 (/home/ananta/Downloads/officeWork/futsalBookingSystem/target/classes started by ananta in /home/ananta/Downloads/officeWork/futsalBookingSystem)
+2023-12-26T06:38:31.875+05:45  INFO 17869 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : The following 1 profile is active: "dev"
+2023-12-26T06:38:31.947+05:45  INFO 17869 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-12-26T06:38:31.948+05:45  INFO 17869 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-12-26T06:38:32.604+05:45  INFO 17869 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-26T06:38:32.669+05:45  INFO 17869 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 58 ms. Found 5 JPA repository interfaces.
+2023-12-26T06:38:33.246+05:45  INFO 17869 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2023-12-26T06:38:33.259+05:45  INFO 17869 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-26T06:38:33.259+05:45  INFO 17869 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2023-12-26T06:38:33.317+05:45  INFO 17869 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-26T06:38:33.318+05:45  INFO 17869 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1370 ms
+2023-12-26T06:38:33.481+05:45  INFO 17869 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-26T06:38:33.525+05:45  INFO 17869 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-26T06:38:33.552+05:45  INFO 17869 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-26T06:38:33.757+05:45  INFO 17869 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-26T06:38:33.799+05:45  INFO 17869 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-26T06:38:34.271+05:45  INFO 17869 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@565d9fcd
+2023-12-26T06:38:34.274+05:45  INFO 17869 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-26T06:38:34.316+05:45  WARN 17869 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2023-12-26T06:38:35.892+05:45  INFO 17869 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-26T06:38:36.468+05:45  INFO 17869 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T06:38:36.992+05:45  INFO 17869 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-12-26T06:38:37.645+05:45  WARN 17869 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-26T06:38:37.929+05:45  WARN 17869 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-26T06:38:38.035+05:45  INFO 17869 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-12-26T06:38:38.057+05:45  INFO 17869 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2023-12-26T06:38:38.066+05:45  INFO 17869 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Started FutsalBookingSystemApplication in 6.613 seconds (process running for 7.054)
+2023-12-26T06:39:16.559+05:45  INFO 17869 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-26T06:39:16.560+05:45  INFO 17869 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-26T06:39:16.561+05:45  INFO 17869 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-12-26T06:39:16.672+05:45  INFO 17869 --- [http-nio-8080-exec-2] c.i.f.s.serviceImpl.UserServiceImpl      : Slot is booked by userId 024f64d7-644c-4342-8c40-bac674830c65
+2023-12-26T06:39:34.145+05:45  INFO 17869 --- [http-nio-8080-exec-3] c.i.f.s.s.FutsalOwnerServiceImpl         : Reward point calculated successfully
+2023-12-26T06:49:10.157+05:45  INFO 17869 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T06:49:10.160+05:45  INFO 17869 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-26T06:49:10.167+05:45  INFO 17869 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-26T06:49:13.113+05:45  INFO 18122 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Starting FutsalBookingSystemApplication using Java 17.0.9 with PID 18122 (/home/ananta/Downloads/officeWork/futsalBookingSystem/target/classes started by ananta in /home/ananta/Downloads/officeWork/futsalBookingSystem)
+2023-12-26T06:49:13.115+05:45  INFO 18122 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : The following 1 profile is active: "dev"
+2023-12-26T06:49:13.184+05:45  INFO 18122 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-12-26T06:49:13.184+05:45  INFO 18122 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-12-26T06:49:13.810+05:45  INFO 18122 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-26T06:49:13.871+05:45  INFO 18122 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 5 JPA repository interfaces.
+2023-12-26T06:49:14.351+05:45  INFO 18122 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2023-12-26T06:49:14.359+05:45  INFO 18122 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-26T06:49:14.360+05:45  INFO 18122 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2023-12-26T06:49:14.396+05:45  INFO 18122 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-26T06:49:14.396+05:45  INFO 18122 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1212 ms
+2023-12-26T06:49:14.517+05:45  INFO 18122 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-26T06:49:14.550+05:45  INFO 18122 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-26T06:49:14.576+05:45  INFO 18122 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-26T06:49:14.733+05:45  INFO 18122 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-26T06:49:14.755+05:45  INFO 18122 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-26T06:49:14.976+05:45  INFO 18122 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@130bc5db
+2023-12-26T06:49:14.978+05:45  INFO 18122 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-26T06:49:14.998+05:45  WARN 18122 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2023-12-26T06:49:15.716+05:45  INFO 18122 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-26T06:49:15.995+05:45  INFO 18122 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T06:49:16.222+05:45  INFO 18122 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-12-26T06:49:16.539+05:45  WARN 18122 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-26T06:49:16.775+05:45  WARN 18122 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-26T06:49:16.884+05:45  INFO 18122 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-12-26T06:49:16.911+05:45  INFO 18122 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2023-12-26T06:49:16.921+05:45  INFO 18122 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Started FutsalBookingSystemApplication in 4.236 seconds (process running for 4.628)
+2023-12-26T06:50:58.397+05:45  INFO 18122 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-26T06:50:58.397+05:45  INFO 18122 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-26T06:50:58.398+05:45  INFO 18122 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-12-26T06:50:58.496+05:45  INFO 18122 --- [http-nio-8080-exec-1] c.i.f.s.serviceImpl.UserServiceImpl      : Slot is booked by userId 024f64d7-644c-4342-8c40-bac674830c65
+2023-12-26T06:51:16.471+05:45  INFO 18122 --- [http-nio-8080-exec-3] c.i.f.s.s.FutsalOwnerServiceImpl         : Reward point calculated successfully
+2023-12-26T06:54:07.415+05:45  INFO 18122 --- [http-nio-8080-exec-5] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal game slots created successfully.
+2023-12-26T06:54:37.991+05:45  INFO 18122 --- [http-nio-8080-exec-7] c.i.f.s.serviceImpl.UserServiceImpl      : Slot is booked by userId 024f64d7-644c-4342-8c40-bac674830c65
+2023-12-26T06:54:54.728+05:45  INFO 18122 --- [http-nio-8080-exec-8] c.i.f.s.s.FutsalOwnerServiceImpl         : Reward point calculated successfully
+2023-12-26T06:55:04.763+05:45  INFO 18122 --- [http-nio-8080-exec-9] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:55:04.768+05:45  INFO 18122 --- [http-nio-8080-exec-9] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:55:04.771+05:45  INFO 18122 --- [http-nio-8080-exec-9] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:55:06.251+05:45  INFO 18122 --- [http-nio-8080-exec-10] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:55:06.258+05:45  INFO 18122 --- [http-nio-8080-exec-10] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:55:06.262+05:45  INFO 18122 --- [http-nio-8080-exec-10] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:55:06.777+05:45  INFO 18122 --- [http-nio-8080-exec-2] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:55:06.785+05:45  INFO 18122 --- [http-nio-8080-exec-2] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:55:06.788+05:45  INFO 18122 --- [http-nio-8080-exec-2] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T06:55:07.143+05:45  INFO 18122 --- [http-nio-8080-exec-1] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Daily turnover calculated successfully.
+2023-12-26T06:55:07.147+05:45  INFO 18122 --- [http-nio-8080-exec-1] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal weekly turnover calculated successfully
+2023-12-26T06:55:07.153+05:45  INFO 18122 --- [http-nio-8080-exec-1] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal monthly turnover calculated successfully
+2023-12-26T07:02:13.665+05:45  INFO 18122 --- [http-nio-8080-exec-10] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 715 ms
+2023-12-26T07:27:08.872+05:45  INFO 18122 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T07:27:08.899+05:45  INFO 18122 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-26T07:27:08.905+05:45  INFO 18122 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-26T07:27:18.664+05:45  INFO 20550 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Starting FutsalBookingSystemApplication using Java 17.0.9 with PID 20550 (/home/ananta/Downloads/officeWork/futsalBookingSystem/target/classes started by ananta in /home/ananta/Downloads/officeWork/futsalBookingSystem)
+2023-12-26T07:27:18.667+05:45  INFO 20550 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : The following 1 profile is active: "dev"
+2023-12-26T07:27:18.732+05:45  INFO 20550 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-12-26T07:27:18.733+05:45  INFO 20550 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-12-26T07:27:19.699+05:45  INFO 20550 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-26T07:27:19.761+05:45  INFO 20550 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 5 JPA repository interfaces.
+2023-12-26T07:27:20.262+05:45  INFO 20550 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2023-12-26T07:27:20.271+05:45  INFO 20550 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-26T07:27:20.272+05:45  INFO 20550 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2023-12-26T07:27:20.313+05:45  INFO 20550 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-26T07:27:20.314+05:45  INFO 20550 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1580 ms
+2023-12-26T07:27:20.511+05:45  INFO 20550 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-26T07:27:20.567+05:45  INFO 20550 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-26T07:27:20.591+05:45  INFO 20550 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-26T07:27:20.830+05:45  INFO 20550 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-26T07:27:20.858+05:45  INFO 20550 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-26T07:27:21.267+05:45  INFO 20550 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@30c09047
+2023-12-26T07:27:21.268+05:45  INFO 20550 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-26T07:27:21.329+05:45  WARN 20550 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2023-12-26T07:27:22.535+05:45  INFO 20550 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-26T07:27:22.946+05:45  INFO 20550 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T07:27:23.213+05:45  INFO 20550 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-12-26T07:27:23.739+05:45  WARN 20550 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-26T07:27:24.020+05:45  WARN 20550 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-26T07:27:24.146+05:45  INFO 20550 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-12-26T07:27:24.179+05:45  INFO 20550 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2023-12-26T07:27:24.190+05:45  INFO 20550 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Started FutsalBookingSystemApplication in 6.104 seconds (process running for 7.026)
+2023-12-26T07:29:03.986+05:45  INFO 20550 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-26T07:29:03.986+05:45  INFO 20550 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-26T07:29:03.988+05:45  INFO 20550 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-12-26T07:29:04.189+05:45  INFO 20550 --- [http-nio-8080-exec-1] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Owner Signed Up successfully.
+2023-12-26T07:29:32.521+05:45  INFO 20550 --- [http-nio-8080-exec-3] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal registration request send to admin successfully
+2023-12-26T07:30:02.326+05:45 ERROR 20550 --- [http-nio-8080-exec-4] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "org.springframework.mail.javamail.JavaMailSender.send(org.springframework.mail.SimpleMailMessage)" because "this.javaMailSender" is null] with root cause
+
+java.lang.NullPointerException: Cannot invoke "org.springframework.mail.javamail.JavaMailSender.send(org.springframework.mail.SimpleMailMessage)" because "this.javaMailSender" is null
+	at com.intern.futsalBookingSystem.utils.MailUtils.sendEmail(MailUtils.java:23) ~[classes/:na]
+	at com.intern.futsalBookingSystem.service.serviceImpl.AdminServiceImpl.emailSender(AdminServiceImpl.java:136) ~[classes/:na]
+	at com.intern.futsalBookingSystem.service.serviceImpl.AdminServiceImpl.approveFutsalRegistrationRequest(AdminServiceImpl.java:77) ~[classes/:na]
+	at com.intern.futsalBookingSystem.restcontroller.AdminRestController.getFutsalApprove(AdminRestController.java:54) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:262) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.2.jar:6.1.2]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917) ~[spring-webmvc-6.1.2.jar:6.1.2]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829) ~[spring-webmvc-6.1.2.jar:6.1.2]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.2.jar:6.1.2]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.2.jar:6.1.2]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.2.jar:6.1.2]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.2.jar:6.1.2]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.2.jar:6.1.2]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.17.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.2.jar:6.1.2]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.17.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2023-12-26T07:37:43.826+05:45  INFO 20550 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T07:37:43.828+05:45  INFO 20550 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-26T07:37:43.835+05:45  INFO 20550 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-26T07:37:47.959+05:45  INFO 21055 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Starting FutsalBookingSystemApplication using Java 17.0.9 with PID 21055 (/home/ananta/Downloads/officeWork/futsalBookingSystem/target/classes started by ananta in /home/ananta/Downloads/officeWork/futsalBookingSystem)
+2023-12-26T07:37:47.966+05:45  INFO 21055 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : The following 1 profile is active: "dev"
+2023-12-26T07:37:48.117+05:45  INFO 21055 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-12-26T07:37:48.118+05:45  INFO 21055 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-12-26T07:37:49.963+05:45  INFO 21055 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-26T07:37:50.151+05:45  INFO 21055 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 168 ms. Found 5 JPA repository interfaces.
+2023-12-26T07:37:51.376+05:45  INFO 21055 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2023-12-26T07:37:51.398+05:45  INFO 21055 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-26T07:37:51.399+05:45  INFO 21055 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2023-12-26T07:37:51.496+05:45  INFO 21055 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-26T07:37:51.497+05:45  INFO 21055 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3376 ms
+2023-12-26T07:37:51.860+05:45  INFO 21055 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-26T07:37:51.967+05:45  INFO 21055 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-26T07:37:52.025+05:45  INFO 21055 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-26T07:37:52.409+05:45  INFO 21055 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-26T07:37:52.435+05:45  INFO 21055 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-26T07:37:52.709+05:45  INFO 21055 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@61ce470f
+2023-12-26T07:37:52.711+05:45  INFO 21055 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-26T07:37:52.734+05:45  WARN 21055 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2023-12-26T07:37:53.738+05:45  INFO 21055 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-26T07:37:54.072+05:45  INFO 21055 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-26T07:37:54.396+05:45  INFO 21055 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-12-26T07:37:54.821+05:45  WARN 21055 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-26T07:37:55.159+05:45  WARN 21055 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-26T07:37:55.359+05:45  INFO 21055 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-12-26T07:37:55.400+05:45  INFO 21055 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2023-12-26T07:37:55.415+05:45  INFO 21055 --- [restartedMain] c.i.f.FutsalBookingSystemApplication     : Started FutsalBookingSystemApplication in 8.269 seconds (process running for 9.025)
+2023-12-26T07:38:28.239+05:45  INFO 21055 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-26T07:38:28.240+05:45  INFO 21055 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-26T07:38:28.243+05:45  INFO 21055 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-12-26T07:38:33.325+05:45  INFO 21055 --- [http-nio-8080-exec-2] c.i.f.s.serviceImpl.AdminServiceImpl     : Email send successfully
+2023-12-26T07:42:07.559+05:45  INFO 21055 --- [http-nio-8080-exec-5] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Owner Signed Up successfully.
+2023-12-26T07:42:21.919+05:45  INFO 21055 --- [http-nio-8080-exec-6] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal registration request send to admin successfully
+2023-12-26T07:42:41.141+05:45  INFO 21055 --- [http-nio-8080-exec-7] c.i.f.s.serviceImpl.AdminServiceImpl     : Email send successfully
+2023-12-26T07:43:11.632+05:45  INFO 21055 --- [http-nio-8080-exec-8] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal Owner Signed Up successfully.
+2023-12-26T07:43:26.998+05:45  INFO 21055 --- [http-nio-8080-exec-9] c.i.f.s.s.FutsalOwnerServiceImpl         : Futsal registration request send to admin successfully
+2023-12-26T07:43:52.373+05:45  INFO 21055 --- [http-nio-8080-exec-10] c.i.f.s.serviceImpl.AdminServiceImpl     : Email send successfully

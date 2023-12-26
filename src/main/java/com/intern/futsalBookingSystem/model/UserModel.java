@@ -39,4 +39,6 @@ public class UserModel {
     @OneToOne(cascade = CascadeType.ALL)
     private AddressModel address;
 
+    private int rewardPoint;
+
 }

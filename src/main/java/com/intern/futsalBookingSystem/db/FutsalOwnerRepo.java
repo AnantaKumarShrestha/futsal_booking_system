@@ -15,4 +15,7 @@ public interface FutsalOwnerRepo extends JpaRepository<FutsalOwnerModel, UUID> {
     @Query(name = "etFutsalOwnerById")
     Optional<FutsalOwnerModel> getFutsalOwnerById(@Param("futsalOwnerId") UUID futsalOwnerId);
 
+    @Query("SELECT fo FROM FutsalOwnerModel fo JOIN fo.futsals f WHERE f.id = :futsalId")
+    Optional<FutsalOwnerModel> findByFutsals_Id(@Param("futsalId") UUID futsalId);
+
 }

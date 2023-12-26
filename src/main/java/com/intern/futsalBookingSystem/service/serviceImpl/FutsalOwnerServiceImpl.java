@@ -3,6 +3,7 @@ package com.intern.futsalBookingSystem.service.serviceImpl;
 import com.intern.futsalBookingSystem.db.FutsalOwnerRepo;
 import com.intern.futsalBookingSystem.db.FutsalRepo;
 import com.intern.futsalBookingSystem.db.SlotRepo;
+import com.intern.futsalBookingSystem.db.UserRepo;
 import com.intern.futsalBookingSystem.dto.FutsalDto;
 import com.intern.futsalBookingSystem.dto.FutsalListDto;
 import com.intern.futsalBookingSystem.dto.FutsalOwnerDto;
@@ -24,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,9 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
 
     @Autowired
     private SlotRepo slotRepo;
+
+    @Autowired
+    private UserRepo userRepo;
 
     private static final Logger logger = LoggerFactory.getLogger(FutsalOwnerServiceImpl.class);
     @Override
@@ -152,12 +157,15 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
                 String userEmail = bookedByUser.getEmail();
 
 
-//                UserModel user=slot.getBookedByUser();
-//                int reward=user.getRewardPoint();
-//                reward+=5;
-//                user.setRewardPoint(reward);
-//                userRepo.save(user);
-
+                int currentPoint=slot.getBookedByUser().getRewardPoint();
+                int rewardPoint=calculateRewardPoints(slot.getStartTime(),slot.getEndTime());
+                currentPoint+=rewardPoint;
+                logger.info("Reward point calculated successfully");
+                UserModel user=slot.getBookedByUser();
+                user.setRewardPoint(currentPoint);
+                System.out.println(currentPoint);
+                userRepo.save(user);
+                slot.setBookedByUser(user);
                 return SlotMapper.INSTANCE.slotModelIntoSlotDto(slotRepo.save(slot));
             } else {
                 logger.error("User not found Status :Fail");
@@ -169,6 +177,17 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
         }
 
     }
+
+
+    private int calculateRewardPoints(LocalDateTime startTime, LocalDateTime endTime) {
+
+        Duration duration = Duration.between(startTime, endTime);
+        long minutes = duration.toMinutes();
+
+        int rewardPointsPerInterval = 1;
+        return (int) (minutes / 10) * rewardPointsPerInterval;
+    }
+
 
     private double calculateTurnoverForPeriod(UUID futsalId, LocalDateTime start, LocalDateTime end) {
         List<SlotModel> slots = futsalRepo.findCompletedAndBookedSlotsForFutsal(futsalId,start,end);
