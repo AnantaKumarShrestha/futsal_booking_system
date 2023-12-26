@@ -1,9 +1,6 @@
 package com.intern.futsalBookingSystem.service.serviceImpl;
 
-import com.intern.futsalBookingSystem.db.FutsalOwnerRepo;
-import com.intern.futsalBookingSystem.db.FutsalRepo;
-import com.intern.futsalBookingSystem.db.SlotRepo;
-import com.intern.futsalBookingSystem.db.UserRepo;
+import com.intern.futsalBookingSystem.db.*;
 import com.intern.futsalBookingSystem.dto.FutsalDto;
 import com.intern.futsalBookingSystem.dto.FutsalListDto;
 import com.intern.futsalBookingSystem.dto.FutsalOwnerDto;
@@ -13,18 +10,24 @@ import com.intern.futsalBookingSystem.mapper.FutsalListMapper;
 import com.intern.futsalBookingSystem.mapper.FutsalMapper;
 import com.intern.futsalBookingSystem.mapper.FutsalOwnerMapper;
 import com.intern.futsalBookingSystem.mapper.SlotMapper;
-import com.intern.futsalBookingSystem.model.FutsalModel;
-import com.intern.futsalBookingSystem.model.FutsalOwnerModel;
-import com.intern.futsalBookingSystem.model.SlotModel;
-import com.intern.futsalBookingSystem.model.UserModel;
+import com.intern.futsalBookingSystem.model.*;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
 import com.intern.futsalBookingSystem.service.FutsalOwnerService;
+import com.intern.futsalBookingSystem.utils.EmailWithAttachment;
+import com.intern.futsalBookingSystem.utils.PaymentPDF;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -45,6 +48,15 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private EmailWithAttachment emailWithAttachment;
+
+    @Autowired
+    private PaymentPDF paymentPDF;
+
+    @Autowired
+    private InvoiceRepo invoiceRepo;
 
     private static final Logger logger = LoggerFactory.getLogger(FutsalOwnerServiceImpl.class);
     @Override
@@ -143,7 +155,7 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
     }
 
     @Override
-    public SlotDto completeBooking(UUID slotId) {
+    public SlotDto completeBooking(UUID slotId) throws IOException {
         SlotModel slot = slotRepo.getSlotById(slotId).orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
 
         if (!slot.isCompleted()) {
@@ -156,6 +168,25 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
 
                 String userEmail = bookedByUser.getEmail();
 
+               FutsalModel futsal=futsalRepo.getFutsalBySlots_Id(slotId);
+
+                InvoiceModel invoiceModel=new InvoiceModel();
+                invoiceModel.setFutsalId(futsal.getId());
+                invoiceModel.setCustomerName(slot.getBookedByUser().getFirstName()+" "+slot.getBookedByUser().getLastName());
+                invoiceModel.setPrice((int) slot.getPrice());
+                invoiceModel.setGameStartTime(String.valueOf(slot.getStartTime()));
+                invoiceModel.setGameEndTime(String.valueOf(slot.getEndTime()));
+
+                InvoiceModel savedInvoice=invoiceRepo.save(invoiceModel);
+                String invoiceId= String.valueOf(savedInvoice.getInvoiceId());
+                String startTime= String.valueOf(slot.getStartTime());
+                String endTime= String.valueOf(slot.getEndTime());
+                String price= String.valueOf(slot.getPrice());
+                String sslotId= String.valueOf(slot.getId());
+
+
+                byte[] bytes=paymentPDF.asByteInvoice(futsal.getFutsalName(),futsal.getFutsalLocation(),invoiceId ,invoiceModel.getCustomerName(),sslotId,startTime,endTime,price);
+                emailWithAttachment.sendEmailWithAttachment(userEmail,"Invoice","Bill",bytes);
 
                 int currentPoint=slot.getBookedByUser().getRewardPoint();
                 int rewardPoint=calculateRewardPoints(slot.getStartTime(),slot.getEndTime());
@@ -174,6 +205,47 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
         } else {
             logger.error("Booking is already marked as completed Status :Fail");
             throw new ResourceNotFoundException("Booking is already marked as completed");
+        }
+
+    }
+
+    @Override
+    public void invoiceExcelFile(UUID futsalId) {
+
+        List<InvoiceModel> data = invoiceRepo.findAll();
+
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("YourEntityData");
+
+            // Create header row
+            Row headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("ID");
+            headerRow.createCell(1).setCellValue("Date");
+            headerRow.createCell(2).setCellValue("Customer Name");
+            headerRow.createCell(3).setCellValue("Price");
+
+            // Fill data rows
+            int rowNum = 1;
+            for (InvoiceModel invoiceData : data) {
+                Row row = sheet.createRow(rowNum++);
+                row.createCell(0).setCellValue(String.valueOf(invoiceData.getInvoiceId()));
+                row.createCell(1).setCellValue(invoiceData.getDate());
+                row.createCell(2).setCellValue(invoiceData.getCustomerName());
+                row.createCell(3).setCellValue(invoiceData.getPrice());
+                // Add more cells as needed for other fields
+            }
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            // Write the workbook to the ByteArrayOutputStream
+            workbook.write(byteArrayOutputStream);
+
+            // Get the bytes
+            byte[] excelBytes = byteArrayOutputStream.toByteArray();
+
+        //    emailWithAttachment.sendEmailWithAttachment();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

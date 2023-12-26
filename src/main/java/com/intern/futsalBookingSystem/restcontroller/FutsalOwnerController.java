@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class FutsalOwnerController {
 
     @Operation(description = "Complete Booking After User pay the Bill")
     @GetMapping("/futsal-owner/futsal/slots/{slotId}/complete-booking")
-    public SlotDto completeSlotBooking(@PathVariable("slotId") UUID slotId){
+    public SlotDto completeSlotBooking(@PathVariable("slotId") UUID slotId) throws IOException {
         return futsalOwnerService.completeBooking(slotId);
     }
 

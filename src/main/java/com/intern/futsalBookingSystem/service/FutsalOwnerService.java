@@ -8,6 +8,7 @@ import com.intern.futsalBookingSystem.mapper.FutsalListMapper;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,7 +28,9 @@ public interface FutsalOwnerService {
 
     SlotDto cancelBooking(UUID slotID);
 
-    SlotDto completeBooking(UUID slotId);
+    SlotDto completeBooking(UUID slotId) throws IOException;
+
+    void invoiceExcelFile(UUID id);
 
 
 }
