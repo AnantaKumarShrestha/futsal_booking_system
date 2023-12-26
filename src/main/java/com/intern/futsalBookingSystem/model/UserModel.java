@@ -41,4 +41,6 @@ public class UserModel {
 
     private int rewardPoint;
 
+    private String photo;
+
 }

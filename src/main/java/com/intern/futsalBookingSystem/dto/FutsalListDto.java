@@ -25,6 +25,8 @@ public class FutsalListDto {
 
     private boolean isRegistered;
 
+    private String photo;
+
     //   private String photo;
 
 

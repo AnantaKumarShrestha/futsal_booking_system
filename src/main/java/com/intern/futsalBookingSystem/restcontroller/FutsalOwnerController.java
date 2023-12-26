@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,15 +26,15 @@ public class FutsalOwnerController {
 
     @Operation(description = "SignUp Futsal Owner")
     @PostMapping("/futsal-owner")
-    public ResponseEntity<FutsalOwnerDto> signUpFutsalOwner(@RequestBody FutsalOwnerDto futsalOwner){
-        FutsalOwnerDto savedFutsalOwner=futsalOwnerService.signUpFutsalOwner(futsalOwner);
+    public ResponseEntity<FutsalOwnerDto> signUpFutsalOwner(@RequestParam("futsalOwner") String futsalOwner, @RequestParam("photo")MultipartFile photo) throws IOException {
+        FutsalOwnerDto savedFutsalOwner=futsalOwnerService.signUpFutsalOwner(futsalOwner,photo);
         return new ResponseEntity<>(savedFutsalOwner, HttpStatus.OK);
     }
 
     @Operation(description = "Futsal Registration Request To Admin")
     @PostMapping("/futsal-owner/{futsalOwnerId}/futsals/registration")
-    public ResponseEntity<FutsalListDto> futsalRegistrationRequestToAdmin(@PathVariable("futsalOwnerId") UUID futsalOwnerId, @RequestBody FutsalListDto futsal){
-        FutsalListDto savedFutsal=futsalOwnerService.futsalRegistrationRequestToAdmin(futsalOwnerId,futsal);
+    public ResponseEntity<FutsalListDto> futsalRegistrationRequestToAdmin(@PathVariable("futsalOwnerId") UUID futsalOwnerId, @RequestParam("futsal") String futsal,@RequestParam("photo") MultipartFile photo) throws IOException {
+        FutsalListDto savedFutsal=futsalOwnerService.futsalRegistrationRequestToAdmin(futsalOwnerId,futsal,photo);
         return new ResponseEntity<>(savedFutsal,HttpStatus.OK);
     }
 

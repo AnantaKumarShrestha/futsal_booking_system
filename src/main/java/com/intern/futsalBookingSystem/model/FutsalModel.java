@@ -37,4 +37,5 @@ public class FutsalModel {
     @OneToMany(cascade = CascadeType.ALL)
     private List<SlotModel> slots;
 
+    private String photo;
 }

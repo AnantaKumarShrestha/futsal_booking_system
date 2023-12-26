@@ -30,6 +30,8 @@ public class FutsalOwnerDto {
 
     private String phoneNumber;
 
+    private String photo;
+
   //  private List<FutsalModel> futsals;
 
 }

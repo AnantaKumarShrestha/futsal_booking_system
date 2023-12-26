@@ -1,5 +1,8 @@
 package com.intern.futsalBookingSystem.service.serviceImpl;
 
+import com.amazonaws.services.dynamodbv2.xspec.M;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intern.futsalBookingSystem.db.*;
 import com.intern.futsalBookingSystem.dto.FutsalDto;
 import com.intern.futsalBookingSystem.dto.FutsalListDto;
@@ -24,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -58,23 +62,35 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
     @Autowired
     private InvoiceRepo invoiceRepo;
 
+    @Autowired
+    private AwsServiceImpl awsService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
     private static final Logger logger = LoggerFactory.getLogger(FutsalOwnerServiceImpl.class);
     @Override
-    public FutsalOwnerDto signUpFutsalOwner(FutsalOwnerDto futsalOwnerDto) {
-        FutsalOwnerModel futsalOwner=FutsalOwnerMapper.INSTANCE.futsalOwnerModelIntoFutsalOwnerDto(futsalOwnerDto);
-        FutsalOwnerModel savedFutsalOwner=futsalOwnerRepo.save(futsalOwner);
+    public FutsalOwnerDto signUpFutsalOwner(String futsalOwner, MultipartFile photo) throws IOException {
+        FutsalOwnerModel futsalOwnerModel=objectMapper.readValue(futsalOwner,FutsalOwnerModel.class);
+        futsalOwnerModel.setPhoto(awsService.uploadPhotoIntoAws(photo));
+        FutsalOwnerModel savedFutsalOwner=futsalOwnerRepo.save(futsalOwnerModel);
         logger.info("Futsal Owner Signed Up successfully.");
+        savedFutsalOwner.setPhoto(awsService.getPhotoFromAws(savedFutsalOwner.getPhoto()));
+        logger.info("Extracted futsal owner photo from aws server successfully");
         return FutsalOwnerMapper.INSTANCE.futsalOwnerDtoIntoFutsalOwnerModel(savedFutsalOwner);
     }
 
     @Override
-    public FutsalListDto futsalRegistrationRequestToAdmin(UUID futsalOwnerId, FutsalListDto futsalDto) {
-        FutsalOwnerModel futsalOwner =futsalOwnerRepo.getFutsalOwnerById(futsalOwnerId).orElseThrow(()->new ResourceNotFoundException("Futsal Not Found"));
-        FutsalModel futsal =FutsalListMapper.INSTANCE.futsalListDtoIntoFutsalModel(futsalDto);
-        futsalOwner.getFutsals().add(futsal);
+    public FutsalListDto futsalRegistrationRequestToAdmin(UUID futsalOwnerId, String futsal,MultipartFile photo) throws IOException {
+        FutsalOwnerModel futsalOwner =futsalOwnerRepo.getFutsalOwnerById(futsalOwnerId).orElseThrow(()->new ResourceNotFoundException("Futsal owner Not Found"));
+        FutsalModel futsalModel =objectMapper.readValue(futsal,FutsalModel.class);
+        futsalModel.setPhoto(awsService.uploadPhotoIntoAws(photo));
+        futsalOwner.getFutsals().add(futsalModel);
         futsalOwnerRepo.save(futsalOwner);
         logger.info("Futsal registration request send to admin successfully");
-        return FutsalListMapper.INSTANCE.futsalModelIntoFutsalListDto(futsal);
+        futsalModel.setPhoto(awsService.getPhotoFromAws(futsalModel.getPhoto()));
+        logger.info("Extracted futsal photo from aws server successfully");
+        return FutsalListMapper.INSTANCE.futsalModelIntoFutsalListDto(futsalModel);
     }
 
     @Override
@@ -82,7 +98,7 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
         FutsalModel futsal = futsalRepo.getFutsalById(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal Id not found"));
         if(!futsal.isRegistered()){
             logger.error("Futsal not registered (futsal id : {})Status : Fail",futsalId);
-            throw new ResourceNotFoundException("Not Registered");
+            throw new ResourceNotFoundException("Futsal Not Registered");
         }
 
         LocalDateTime startTime = slotRequest.getStartTime();
@@ -215,16 +231,16 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
         List<InvoiceModel> data = invoiceRepo.findAll();
 
         try (Workbook workbook = new XSSFWorkbook()) {
-            Sheet sheet = workbook.createSheet("YourEntityData");
+            Sheet sheet = workbook.createSheet("Data");
 
-            // Create header row
+
             Row headerRow = sheet.createRow(0);
             headerRow.createCell(0).setCellValue("ID");
             headerRow.createCell(1).setCellValue("Date");
             headerRow.createCell(2).setCellValue("Customer Name");
             headerRow.createCell(3).setCellValue("Price");
 
-            // Fill data rows
+
             int rowNum = 1;
             for (InvoiceModel invoiceData : data) {
                 Row row = sheet.createRow(rowNum++);

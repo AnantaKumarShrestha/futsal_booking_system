@@ -31,6 +31,8 @@ public class UserDto {
 
     private int rewardPoint;
 
+    private String photo;
+
 
 
 }

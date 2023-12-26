@@ -40,6 +40,6 @@ public class FutsalOwnerModel {
     @JoinColumn(name = "futsalId")
     private List<FutsalModel> futsals;
 
-
+   private String photo;
 
 }

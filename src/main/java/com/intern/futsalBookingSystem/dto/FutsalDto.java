@@ -30,5 +30,6 @@ public class FutsalDto {
 
     private List<SlotModel> slots;
 
+    private String photo;
 
 }

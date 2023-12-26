@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,8 +26,8 @@ public class UserRestController {
 
     @Operation(description = "User SignUp API")
     @PostMapping("/user")
-    public UserDto signUpUser(@RequestBody UserDto user){
-        return userService.signUpUser(user);
+    public UserDto signUpUser(@RequestParam("user") String user, @RequestParam("photo")MultipartFile file) throws IOException {
+        return userService.signUpUser(user,file);
     }
 
     @Operation(description = "Get Available Futsal List")

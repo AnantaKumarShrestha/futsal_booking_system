@@ -24,4 +24,6 @@ public class UserListDto {
 
     private int rewardPoint;
 
+    private String photo;
+
 }

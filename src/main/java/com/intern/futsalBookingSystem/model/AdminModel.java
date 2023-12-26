@@ -48,5 +48,6 @@ public class AdminModel {
     @Column(nullable = false, length = 5)
     private Role role;
 
+    private String photo;
 
 }

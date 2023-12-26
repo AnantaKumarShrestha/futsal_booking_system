@@ -43,5 +43,6 @@ public class AdminDto {
     @Column(nullable = false, length = 5)
     private Role role;
 
+    private String photo;
 
 }
