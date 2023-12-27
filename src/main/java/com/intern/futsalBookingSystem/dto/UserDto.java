@@ -29,6 +29,10 @@ public class UserDto {
 
     private AddressModel address;
 
+    private int rewardPoint;
+
+    private String photo;
+
 
 
 }

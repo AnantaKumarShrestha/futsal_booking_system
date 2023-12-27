@@ -29,5 +29,9 @@ public interface FutsalRepo extends JpaRepository<FutsalModel, UUID> {
     @Query(name = "getAllFutsal")
     List<FutsalModel> getAllFutsal();
 
+//    @Query(name = "futsalBySlotId")
+//    FutsalModel getFutsalBySlotId(@Param(("slotId"))UUID slottId);
+
+    FutsalModel getFutsalBySlots_Id(UUID slotId);
 
 }

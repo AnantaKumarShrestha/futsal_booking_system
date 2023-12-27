@@ -8,6 +8,7 @@ import java.util.UUID;
 
 @NamedQuery(name = "getFutsalById", query = "SELECT f FROM FutsalModel f WHERE f.id = :futsalId")
 @NamedQuery(name = "getAllFutsal",query = "SELECT f FROM FutsalModel f")
+@NamedQuery(name = "getFutsalBySlotId", query = "SELECT f FROM FutsalModel f JOIN f.slots s WHERE s.id = :slotId")
 @Data
 @Entity
 public class FutsalModel {
@@ -36,4 +37,5 @@ public class FutsalModel {
     @OneToMany(cascade = CascadeType.ALL)
     private List<SlotModel> slots;
 
+    private String photo;
 }

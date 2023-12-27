@@ -22,7 +22,7 @@ public class FutsalOwnerModel {
     @Column(nullable = false, length = 50)
     private String lastName;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50,unique = true)
     @Convert(converter = EncryptorDecryptor.class)
     private String username;
 
@@ -40,6 +40,6 @@ public class FutsalOwnerModel {
     @JoinColumn(name = "futsalId")
     private List<FutsalModel> futsals;
 
-
+   private String photo;
 
 }

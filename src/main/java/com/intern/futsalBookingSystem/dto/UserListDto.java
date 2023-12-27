@@ -22,4 +22,8 @@ public class UserListDto {
 
     private AddressModel address;
 
+    private int rewardPoint;
+
+    private String photo;
+
 }

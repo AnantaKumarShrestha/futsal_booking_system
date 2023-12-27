@@ -1,15 +1,19 @@
 package com.intern.futsalBookingSystem.restcontroller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.intern.futsalBookingSystem.dto.*;
 import com.intern.futsalBookingSystem.enums.Status;
 import com.intern.futsalBookingSystem.payload.ApiResponse;
+import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.service.AdminService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,9 +28,16 @@ public class AdminRestController {
 
     @Operation(description = "Admin SignUp API")
     @PostMapping("/admin")
-    public ResponseEntity<AdminDto> createAdmin(@RequestBody AdminDto adminDto){
-        AdminDto admin=adminService.signUp(adminDto);
-        return new ResponseEntity<>(admin, HttpStatus.CREATED);
+    public ResponseEntity<AdminDto> createAdmin(@RequestParam("admin") String admin,@RequestParam("photo") MultipartFile file) throws IOException {
+        AdminDto savedAdmin=adminService.signUp(admin,file);
+        return new ResponseEntity<>(savedAdmin, HttpStatus.CREATED);
+    }
+
+    @Operation(description = "Admin SignIn")
+    @PostMapping("/admin/signin")
+    public ResponseEntity<AdminDto> adminSignIn(@RequestBody SignInModel signInModel) {
+        AdminDto admin=adminService.signIn(signInModel);
+        return new ResponseEntity<>(admin, HttpStatus.OK);
     }
     //===================================================================
 
