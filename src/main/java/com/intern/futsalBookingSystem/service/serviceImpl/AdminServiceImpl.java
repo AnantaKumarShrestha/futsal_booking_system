@@ -107,6 +107,8 @@ public class AdminServiceImpl implements AdminService {
     public void rejectFutsalRegistrationRequest(UUID futsalId) {
 
         FutsalModel futsalRequest = futsalRepo.findById(futsalId).orElseThrow(() -> new ResourceNotFoundException("Futsal Registration Request not found"));
+        awsService.deletePhotoInAwsServer(futsalRequest.getPhoto());
+        logger.info("Futsal photo has been deleted from aws server successfully");
         futsalRepo.delete(futsalRequest);
         logger.info("Futsal registration request is rejected");
         logger.info("Futsal registration request is deleted from database successfully.");
@@ -132,6 +134,8 @@ public class AdminServiceImpl implements AdminService {
     public void removeFutsal(UUID futsalId) {
 
        FutsalModel futsal=futsalRepo.findById(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal not found"));
+       awsService.deletePhotoInAwsServer(futsal.getPhoto());
+       logger.info("Futsal photo has been deleted from aws server successfully");
        futsalRepo.delete(futsal);
        logger.info("Futsal is removed from database successfully");
 

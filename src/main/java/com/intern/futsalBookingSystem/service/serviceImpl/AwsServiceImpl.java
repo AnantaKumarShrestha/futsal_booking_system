@@ -3,9 +3,11 @@ package com.intern.futsalBookingSystem.service.serviceImpl;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.intern.futsalBookingSystem.model.FutsalModel;
 import com.intern.futsalBookingSystem.model.FutsalOwnerModel;
+import com.intern.futsalBookingSystem.model.InvoiceModel;
 import com.intern.futsalBookingSystem.model.UserModel;
 import com.intern.futsalBookingSystem.service.AwsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AwsServiceImpl implements AwsService {
@@ -86,4 +89,14 @@ public class AwsServiceImpl implements AwsService {
 
         return fileName;
     }
+
+    @Override
+    public void deletePhotoInAwsServer(String photo) {
+
+        DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucketName, photo);
+        amazonS3.deleteObject(deleteObjectRequest);
+
+    }
+
+
 }

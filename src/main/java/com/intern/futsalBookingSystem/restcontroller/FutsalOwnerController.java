@@ -2,6 +2,7 @@ package com.intern.futsalBookingSystem.restcontroller;
 
 import com.intern.futsalBookingSystem.dto.FutsalListDto;
 import com.intern.futsalBookingSystem.dto.FutsalOwnerDto;
+import com.intern.futsalBookingSystem.dto.InvoiceDto;
 import com.intern.futsalBookingSystem.dto.SlotDto;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
@@ -64,11 +65,16 @@ public class FutsalOwnerController {
     }
 
     @Operation(description = "Own Futsal Game Slots")
-    @GetMapping("/futsal-owner/futsal/{futsalId}")
+    @GetMapping("/futsal-owner/futsal/{futsalId}/slot")
     public List<SlotDto> ownFutsalSlots(@PathVariable("futsalId") UUID futsalId){
         return futsalOwnerService.getOwnFutsalSlots(futsalId);
     }
 
+    @Operation(description = "Own Futsal statement")
+    @GetMapping("/futsal-owner/futsal/{futsalId}/statement")
+    public List<InvoiceDto> getFutsalStatement(@PathVariable("futsalId") UUID futsalId){
+        return futsalOwnerService.invoiceExcelFile(futsalId);
+    }
 
 
 }

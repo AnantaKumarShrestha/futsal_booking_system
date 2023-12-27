@@ -4,15 +4,9 @@ import com.amazonaws.services.dynamodbv2.xspec.M;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intern.futsalBookingSystem.db.*;
-import com.intern.futsalBookingSystem.dto.FutsalDto;
-import com.intern.futsalBookingSystem.dto.FutsalListDto;
-import com.intern.futsalBookingSystem.dto.FutsalOwnerDto;
-import com.intern.futsalBookingSystem.dto.SlotDto;
+import com.intern.futsalBookingSystem.dto.*;
 import com.intern.futsalBookingSystem.exception.ResourceNotFoundException;
-import com.intern.futsalBookingSystem.mapper.FutsalListMapper;
-import com.intern.futsalBookingSystem.mapper.FutsalMapper;
-import com.intern.futsalBookingSystem.mapper.FutsalOwnerMapper;
-import com.intern.futsalBookingSystem.mapper.SlotMapper;
+import com.intern.futsalBookingSystem.mapper.*;
 import com.intern.futsalBookingSystem.model.*;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
@@ -200,9 +194,11 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
                 String price= String.valueOf(slot.getPrice());
                 String sslotId= String.valueOf(slot.getId());
 
+                LocalDateTime date=LocalDateTime.now();
+                invoiceModel.setDate(String.valueOf(date));
 
                 byte[] bytes=paymentPDF.asByteInvoice(futsal.getFutsalName(),futsal.getFutsalLocation(),invoiceId ,invoiceModel.getCustomerName(),sslotId,startTime,endTime,price);
-                emailWithAttachment.sendEmailWithAttachment(userEmail,"Invoice","Bill",bytes);
+                emailWithAttachment.sendEmailWithAttachment(userEmail,"Invoice","Bill",bytes,"invoice.pdf");
 
                 int currentPoint=slot.getBookedByUser().getRewardPoint();
                 int rewardPoint=calculateRewardPoints(slot.getStartTime(),slot.getEndTime());
@@ -226,43 +222,52 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
     }
 
     @Override
-    public void invoiceExcelFile(UUID futsalId) {
+    public List<InvoiceDto> invoiceExcelFile(UUID futsalId) {
 
-        List<InvoiceModel> data = invoiceRepo.findAll();
+       // FutsalModel futsal=futsalRepo.getFutsalById(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal Not found"));
+        FutsalOwnerModel futsalOwner=futsalOwnerRepo.findByFutsals_Id(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal Not Found"));
+        List<InvoiceModel> data = invoiceRepo.findAllByFutsalId(futsalId);
+        String subject="Futsal Statement";
+        String message="";
 
         try (Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet("Data");
 
 
             Row headerRow = sheet.createRow(0);
-            headerRow.createCell(0).setCellValue("ID");
-            headerRow.createCell(1).setCellValue("Date");
-            headerRow.createCell(2).setCellValue("Customer Name");
-            headerRow.createCell(3).setCellValue("Price");
+            headerRow.createCell(0).setCellValue("SN");
+            headerRow.createCell(1).setCellValue("ID");
+            headerRow.createCell(2).setCellValue("Date");
+            headerRow.createCell(3).setCellValue("Customer Name");
+            headerRow.createCell(4).setCellValue("Price");
 
 
             int rowNum = 1;
             for (InvoiceModel invoiceData : data) {
                 Row row = sheet.createRow(rowNum++);
-                row.createCell(0).setCellValue(String.valueOf(invoiceData.getInvoiceId()));
-                row.createCell(1).setCellValue(invoiceData.getDate());
-                row.createCell(2).setCellValue(invoiceData.getCustomerName());
-                row.createCell(3).setCellValue(invoiceData.getPrice());
-                // Add more cells as needed for other fields
+                row.createCell(0).setCellValue(rowNum-1);
+                row.createCell(1).setCellValue(String.valueOf(invoiceData.getInvoiceId()));
+                row.createCell(2).setCellValue(invoiceData.getDate());
+                row.createCell(3).setCellValue(invoiceData.getCustomerName());
+                row.createCell(4).setCellValue(invoiceData.getPrice());
+
             }
 
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            // Write the workbook to the ByteArrayOutputStream
+
             workbook.write(byteArrayOutputStream);
 
-            // Get the bytes
+
             byte[] excelBytes = byteArrayOutputStream.toByteArray();
 
-        //    emailWithAttachment.sendEmailWithAttachment();
+            emailWithAttachment.sendEmailWithAttachment(futsalOwner.getGmail(),subject,message,excelBytes,"Futsal_Statement.xlsx");
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return InvoiceMapper.INSTANCE.invoiceModelListIntoInvoice(data);
 
     }
 

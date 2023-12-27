@@ -1,11 +1,9 @@
 package com.intern.futsalBookingSystem.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.intern.futsalBookingSystem.dto.FutsalDto;
-import com.intern.futsalBookingSystem.dto.FutsalListDto;
-import com.intern.futsalBookingSystem.dto.FutsalOwnerDto;
-import com.intern.futsalBookingSystem.dto.SlotDto;
+import com.intern.futsalBookingSystem.dto.*;
 import com.intern.futsalBookingSystem.mapper.FutsalListMapper;
+import com.intern.futsalBookingSystem.model.InvoiceModel;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
 import com.intern.futsalBookingSystem.utils.MailUtils;
@@ -33,7 +31,10 @@ public interface FutsalOwnerService {
 
     SlotDto completeBooking(UUID slotId) throws IOException;
 
-    void invoiceExcelFile(UUID id);
+    List<InvoiceDto> invoiceExcelFile(UUID id);
+
+
+
 
 
 }

@@ -15,7 +15,7 @@ public class EmailWithAttachment {
     private JavaMailSender javaMailSender;
 
 
-    public void sendEmailWithAttachment(String to,String subject, String body, byte[] attachment) {
+    public void sendEmailWithAttachment(String to,String subject, String body, byte[] attachment,String fileName) {
 
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -26,7 +26,7 @@ public class EmailWithAttachment {
             helper.setText(body);
 
             ByteArrayResource bar=new ByteArrayResource(attachment);
-            helper.addAttachment("invoiceBtye.pdf",bar);
+            helper.addAttachment(fileName,bar);
             javaMailSender.send(mimeMessage);
         } catch (MessagingException e) {
             throw new RuntimeException("Failed to send email with attachment", e);
