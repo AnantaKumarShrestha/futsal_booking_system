@@ -2,6 +2,7 @@ package com.intern.futsalBookingSystem.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.intern.futsalBookingSystem.dto.*;
+import com.intern.futsalBookingSystem.payload.SignInModel;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -29,5 +30,7 @@ public interface AdminService {
    List<FutsalListDto> getFutsalListOfFutsalOwner(UUID futsalOwnerId);
 
    List<FutsalOwnerDto> getFutsalOwnerList();
+
+   AdminDto signIn(SignInModel signInModel);
 
 }

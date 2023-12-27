@@ -8,6 +8,7 @@ import com.intern.futsalBookingSystem.dto.*;
 import com.intern.futsalBookingSystem.exception.ResourceNotFoundException;
 import com.intern.futsalBookingSystem.mapper.*;
 import com.intern.futsalBookingSystem.model.*;
+import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
 import com.intern.futsalBookingSystem.service.FutsalOwnerService;
@@ -269,6 +270,13 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
 
         return InvoiceMapper.INSTANCE.invoiceModelListIntoInvoice(data);
 
+    }
+
+    @Override
+    public FutsalOwnerDto SignIn(SignInModel signInModel) {
+        FutsalOwnerModel futsalOwner=futsalOwnerRepo.findByUsernameAndPassword(signInModel.getUsername(),signInModel.getPassword()).orElseThrow(()->new ResourceNotFoundException("Futsal owner not found"));
+        futsalOwner.setPhoto(awsService.getPhotoFromAws(futsalOwner.getPhoto()));
+        return FutsalOwnerMapper.INSTANCE.futsalOwnerDtoIntoFutsalOwnerModel(futsalOwner);
     }
 
 

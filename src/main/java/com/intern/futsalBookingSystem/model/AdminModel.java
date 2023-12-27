@@ -36,7 +36,7 @@ public class AdminModel {
     @Column(nullable = false, length = 120)
     private String gmail;
 
-    @Column(nullable = false, length = 120)
+    @Column(nullable = false, length = 120,unique = true)
     @Convert(converter = EncryptorDecryptor.class)
     private String username;
 

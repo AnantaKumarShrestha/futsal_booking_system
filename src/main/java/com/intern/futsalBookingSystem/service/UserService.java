@@ -6,6 +6,7 @@ import com.intern.futsalBookingSystem.dto.SlotDto;
 import com.intern.futsalBookingSystem.dto.SlotsListDto;
 import com.intern.futsalBookingSystem.dto.UserDto;
 import com.intern.futsalBookingSystem.model.UserModel;
+import com.intern.futsalBookingSystem.payload.SignInModel;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -30,5 +31,7 @@ public interface UserService {
     SlotDto cancelBooking(UUID slotId);
 
     List<SlotsListDto> getOwnBookings(UUID userId);
+
+    UserDto userSignIn(SignInModel signInModel);
 
 }

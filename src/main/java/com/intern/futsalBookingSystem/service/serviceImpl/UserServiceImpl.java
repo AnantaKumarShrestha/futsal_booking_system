@@ -14,6 +14,7 @@ import com.intern.futsalBookingSystem.mapper.UserMapper;
 import com.intern.futsalBookingSystem.model.FutsalModel;
 import com.intern.futsalBookingSystem.model.SlotModel;
 import com.intern.futsalBookingSystem.model.UserModel;
+import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.service.AwsService;
 import com.intern.futsalBookingSystem.service.UserService;
 import org.slf4j.Logger;
@@ -136,6 +137,13 @@ public class UserServiceImpl implements UserService {
         List<SlotModel> slots=slotRepo.findAllByBookedByUserId(userId);
         logger.info("Own futsal booking data are extracted from database successfully.");
         return SlotsListMapper.INSTANCE.slotModelListIntoSlotListDto(slots);
+    }
+
+    @Override
+    public UserDto userSignIn(SignInModel signModel) {
+        UserModel user=userRepo.findByEmailAndPassword(signModel.getUsername(), signModel.getPassword()).orElseThrow(()->new ResourceNotFoundException("User not found"));
+        user.setPhoto(awsService.getPhotoFromAws(user.getPhoto()));
+        return UserMapper.INSTANCE.userModelIntoUserDto(user);
     }
 
 

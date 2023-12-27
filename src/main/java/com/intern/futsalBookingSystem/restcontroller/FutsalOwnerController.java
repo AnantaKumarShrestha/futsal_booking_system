@@ -4,6 +4,7 @@ import com.intern.futsalBookingSystem.dto.FutsalListDto;
 import com.intern.futsalBookingSystem.dto.FutsalOwnerDto;
 import com.intern.futsalBookingSystem.dto.InvoiceDto;
 import com.intern.futsalBookingSystem.dto.SlotDto;
+import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
 import com.intern.futsalBookingSystem.service.FutsalOwnerService;
@@ -29,7 +30,14 @@ public class FutsalOwnerController {
     @PostMapping("/futsal-owner")
     public ResponseEntity<FutsalOwnerDto> signUpFutsalOwner(@RequestParam("futsalOwner") String futsalOwner, @RequestParam("photo")MultipartFile photo) throws IOException {
         FutsalOwnerDto savedFutsalOwner=futsalOwnerService.signUpFutsalOwner(futsalOwner,photo);
-        return new ResponseEntity<>(savedFutsalOwner, HttpStatus.OK);
+        return new ResponseEntity<>(savedFutsalOwner, HttpStatus.CREATED);
+    }
+
+    @Operation(description = "Futsal owner sign inr")
+    @PostMapping("/futsal-owner/signin")
+    public ResponseEntity<FutsalOwnerDto> futsalOwnerSignIn(@RequestBody SignInModel signInModel) throws IOException {
+        FutsalOwnerDto futsalOwner=futsalOwnerService.SignIn(signInModel);
+        return new ResponseEntity<>(futsalOwner, HttpStatus.OK);
     }
 
     @Operation(description = "Futsal Registration Request To Admin")

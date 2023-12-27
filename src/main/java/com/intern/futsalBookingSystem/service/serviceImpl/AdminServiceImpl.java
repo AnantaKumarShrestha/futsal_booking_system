@@ -14,6 +14,7 @@ import com.intern.futsalBookingSystem.model.AdminModel;
 import com.intern.futsalBookingSystem.model.FutsalModel;
 import com.intern.futsalBookingSystem.model.FutsalOwnerModel;
 import com.intern.futsalBookingSystem.model.UserModel;
+import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.service.AdminService;
 import com.intern.futsalBookingSystem.service.AwsService;
 import com.intern.futsalBookingSystem.utils.MailUtils;
@@ -98,7 +99,7 @@ public class AdminServiceImpl implements AdminService {
         mailUtils.sendEmail(futsalOwner.getGmail(),"Futsal Booking System",futsalOwner.getFirstName()+" "+futsalOwner.getLastName()+" your futsal registration request has been approved by our company");
         logger.info("Email send successfully");
         FutsalModel savedFutsal=futsalRepo.save(futsalRequest);
-        savedFutsal.setPhoto(savedFutsal.getPhoto());
+        savedFutsal.setPhoto(awsService.getPhotoFromAws(savedFutsal.getPhoto()));
         logger.info("Extracted futsal photo from aws successfully");
         return FutsalListMapper.INSTANCE.futsalModelIntoFutsalListDto(savedFutsal);
     }
@@ -162,6 +163,13 @@ public class AdminServiceImpl implements AdminService {
         futsalOwnerList=awsService.setFutsalOwnerPhotoIntoUrl(futsalOwnerList);
         return FutsalOwnerMapper.INSTANCE.futsalOwnerListIntoFutsalOwnerDtoList(futsalOwnerList);
 
+    }
+
+    @Override
+    public AdminDto signIn(SignInModel signInModel) {
+        AdminModel admin=adminRepo.findByUsernameAndPassword(signInModel.getUsername(),signInModel.getPassword()).orElseThrow(()->new ResourceNotFoundException("Admin not found"));
+        admin.setPhoto(awsService.getPhotoFromAws(admin.getPhoto()));
+        return AdminMapper.INSTANCE.adminModelIntoAdminDto(admin);
     }
 
 }
