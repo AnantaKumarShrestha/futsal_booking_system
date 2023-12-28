@@ -38,4 +38,8 @@ public class FutsalModel {
     private List<SlotModel> slots;
 
     private String photo;
+
+    @OneToMany(mappedBy = "futsal", cascade = CascadeType.ALL)
+    private List<RatingModel> ratings;
+
 }

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+import java.util.List;
 import java.util.UUID;
 
 @NamedQuery(name = "getUserById", query = "SELECT u FROM UserModel u WHERE u.id = :userId")
@@ -45,5 +46,8 @@ public class UserModel {
     private int rewardPoint;
 
     private String photo;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<RatingModel> ratings;
 
 }
