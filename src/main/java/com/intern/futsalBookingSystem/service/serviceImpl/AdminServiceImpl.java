@@ -18,6 +18,7 @@ import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.service.AdminService;
 import com.intern.futsalBookingSystem.service.AwsService;
 import com.intern.futsalBookingSystem.utils.MailUtils;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,7 @@ public class AdminServiceImpl implements AdminService {
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override
+    @Transactional
     public AdminDto signUp(String admin, MultipartFile photo) throws IOException {
 
         AdminModel adminModel= objectMapper.readValue(admin,AdminModel.class);
@@ -135,7 +137,7 @@ public class AdminServiceImpl implements AdminService {
     public void removeFutsal(UUID futsalId) {
 
        FutsalModel futsal=futsalRepo.findById(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal not found"));
-       awsService.deletePhotoInAwsServer(futsal.getPhoto());
+      // awsService.deletePhotoInAwsServer(futsal.getPhoto());
        logger.info("Futsal photo has been deleted from aws server successfully");
        futsalRepo.delete(futsal);
        logger.info("Futsal is removed from database successfully");

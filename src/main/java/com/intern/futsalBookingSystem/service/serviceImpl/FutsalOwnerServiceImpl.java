@@ -22,12 +22,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +67,7 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
 
     private static final Logger logger = LoggerFactory.getLogger(FutsalOwnerServiceImpl.class);
     @Override
+  //  @Transactional
     public FutsalOwnerDto signUpFutsalOwner(String futsalOwner, MultipartFile photo) throws IOException {
         FutsalOwnerModel futsalOwnerModel=objectMapper.readValue(futsalOwner,FutsalOwnerModel.class);
         futsalOwnerModel.setPhoto(awsService.uploadPhotoIntoAws(photo));
@@ -166,6 +169,7 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
     }
 
     @Override
+    @Transactional
     public SlotDto completeBooking(UUID slotId) throws IOException {
         SlotModel slot = slotRepo.getSlotById(slotId).orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
 
@@ -187,6 +191,8 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
                 invoiceModel.setPrice((int) slot.getPrice());
                 invoiceModel.setGameStartTime(String.valueOf(slot.getStartTime()));
                 invoiceModel.setGameEndTime(String.valueOf(slot.getEndTime()));
+                LocalDate date= LocalDate.now();
+                invoiceModel.setDate(String.valueOf(date));
 
                 InvoiceModel savedInvoice=invoiceRepo.save(invoiceModel);
                 String invoiceId= String.valueOf(savedInvoice.getInvoiceId());
@@ -195,8 +201,7 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
                 String price= String.valueOf(slot.getPrice());
                 String sslotId= String.valueOf(slot.getId());
 
-                LocalDateTime date=LocalDateTime.now();
-                invoiceModel.setDate(String.valueOf(date));
+
 
                 byte[] bytes=paymentPDF.asByteInvoice(futsal.getFutsalName(),futsal.getFutsalLocation(),invoiceId ,invoiceModel.getCustomerName(),sslotId,startTime,endTime,price);
                 emailWithAttachment.sendEmailWithAttachment(userEmail,"Invoice","Bill",bytes,"invoice.pdf");

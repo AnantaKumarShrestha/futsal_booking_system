@@ -18,7 +18,7 @@ public interface FutsalOwnerMapper {
     FutsalOwnerModel futsalOwnerModelIntoFutsalOwnerDto(FutsalOwnerDto futsalOwnerDto);
 
     @Mapping(target = "username", source = "username", qualifiedByName = "markUsername")
-//@Mapping(target = "password", source = "password", qualifiedByName = "maskPassword")
+    @Mapping(target = "password", source = "password", qualifiedByName = "maskPassword")
     FutsalOwnerDto futsalOwnerDtoIntoFutsalOwnerModel(FutsalOwnerModel futsalOwnerModel);
 
     List<FutsalOwnerDto> futsalOwnerListIntoFutsalOwnerDtoList(List<FutsalOwnerModel> futsalOwnerList);
