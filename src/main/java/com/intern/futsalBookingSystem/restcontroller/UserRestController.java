@@ -11,6 +11,7 @@ import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.service.RatingService;
 import com.intern.futsalBookingSystem.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class UserRestController {
 
     @Operation(description = "User SignUp API")
     @PostMapping("/user")
-    public UserDto signUpUser(@RequestParam("user") String user, @RequestParam("photo")MultipartFile file) throws IOException {
+    public UserDto signUpUser(@RequestParam("user") @Valid String user, @RequestParam("photo")MultipartFile file) throws IOException {
         return userService.signUpUser(user,file);
     }
 

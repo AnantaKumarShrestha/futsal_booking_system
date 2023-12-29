@@ -1,9 +1,7 @@
 package com.intern.futsalBookingSystem.dto;
 
 import com.intern.futsalBookingSystem.model.AddressModel;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
+import com.intern.futsalBookingSystem.validator.UniqueEmail;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +19,7 @@ public class UserDto {
 
     private int age;
 
+    @UniqueEmail
     private String email;
 
     private String password;

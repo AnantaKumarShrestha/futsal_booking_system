@@ -58,12 +58,11 @@ public class AdminServiceImpl implements AdminService {
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override
-    @Transactional
     public AdminDto signUp(String admin, MultipartFile photo) throws IOException {
 
         AdminModel adminModel= objectMapper.readValue(admin,AdminModel.class);
         adminModel.setPhoto(awsService.uploadPhotoIntoAws(photo));
-        AdminModel savedAdmin=adminRepo.save(adminModel);
+        AdminModel savedAdmin = adminRepo.save(adminModel);
         logger.info("Admin is signed up successfully");
         savedAdmin.setPhoto(awsService.getPhotoFromAws(savedAdmin.getPhoto()));
         logger.info("Extracted admin photo from aws server successfully");

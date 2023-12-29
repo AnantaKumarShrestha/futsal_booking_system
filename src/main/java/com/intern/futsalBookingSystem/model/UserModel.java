@@ -1,8 +1,8 @@
 package com.intern.futsalBookingSystem.model;
 
 import com.intern.futsalBookingSystem.encryption.EncryptorDecryptor;
+import com.intern.futsalBookingSystem.validator.UniqueEmail;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
@@ -31,6 +31,8 @@ public class UserModel {
     @Pattern(message = "Enter a valid email",regexp = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")
     @Column(nullable = false,unique = true)
     @Convert(converter = EncryptorDecryptor.class)
+    @UniqueEmail
+ //   @Unique()
     private String email;
 
     @Column(nullable = false, length = 50)

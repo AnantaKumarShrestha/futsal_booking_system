@@ -5,6 +5,7 @@ import com.intern.futsalBookingSystem.encryption.EncryptorDecryptor;
 import com.intern.futsalBookingSystem.enums.Gender;
 import com.intern.futsalBookingSystem.enums.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 import java.util.UUID;
@@ -38,6 +39,7 @@ public class AdminModel {
 
     @Column(nullable = false, length = 120,unique = true)
     @Convert(converter = EncryptorDecryptor.class)
+    @Email
     private String username;
 
     @Column(nullable = false, length = 120)
