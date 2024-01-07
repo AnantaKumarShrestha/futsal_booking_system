@@ -14,12 +14,17 @@ import com.intern.futsalBookingSystem.mapper.UserMapper;
 import com.intern.futsalBookingSystem.model.FutsalModel;
 import com.intern.futsalBookingSystem.model.SlotModel;
 import com.intern.futsalBookingSystem.model.UserModel;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
+import com.intern.futsalBookingSystem.security.JwtService;
 import com.intern.futsalBookingSystem.service.AwsService;
 import com.intern.futsalBookingSystem.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,17 +53,31 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ObjectMapper objectMapper;
 
+//    @Autowired
+//    private TokenRepository tokenRepository;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtService jwtService;
+
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Override
     public UserDto signUpUser(String user, MultipartFile file) throws IOException {
 
         UserModel userModel= objectMapper.readValue(user,UserModel.class);
-        userModel.setPhoto(awsService.uploadPhotoIntoAws(file));
+
+       // userModel.setPhoto(awsService.uploadPhotoIntoAws(file));
         UserModel savedUser=userRepo.save(userModel);
         logger.info("User signed up successfully.");
-        savedUser.setPhoto(awsService.getPhotoFromAws(savedUser.getPhoto()));
+     //   savedUser.setPhoto(awsService.getPhotoFromAws(savedUser.getPhoto()));
         logger.info("Extracted user photo from aws server successfully");
-        return UserMapper.INSTANCE.userModelIntoUserDto(savedUser);
+        var jwtToken = jwtService.generateToken(userModel);
+        System.out.println(jwtToken);
+        var refreshToken = jwtService.generateRefreshToken(userModel);
+        System.out.println("as "+refreshToken);
+//        saveUserToken(userModel, jwtToken);
+        System.out.println("ko");
+        return UserMapper.INSTANCE.userModelIntoUserDto(userModel);
 
     }
 
@@ -141,10 +160,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto userSignIn(SignInModel signModel) {
+
+
         UserModel user=userRepo.findByEmailAndPassword(signModel.getUsername(), signModel.getPassword()).orElseThrow(()->new ResourceNotFoundException("User not found"));
         user.setPhoto(awsService.getPhotoFromAws(user.getPhoto()));
         return UserMapper.INSTANCE.userModelIntoUserDto(user);
     }
+
+
+    public AuthenticationResponse authenticate(SignInModel request) {
+        UserModel user = userRepo.findByEmail(request.getUsername())
+                .orElseThrow(()->new ResourceNotFoundException("User not Found"));
+        String jwtToken = jwtService.generateToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user);
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .build();
+    }
+
+
 
 
 }

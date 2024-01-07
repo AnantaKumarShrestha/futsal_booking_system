@@ -4,6 +4,7 @@ import com.intern.futsalBookingSystem.dto.FutsalListDto;
 import com.intern.futsalBookingSystem.dto.FutsalOwnerDto;
 import com.intern.futsalBookingSystem.dto.InvoiceDto;
 import com.intern.futsalBookingSystem.dto.SlotDto;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
@@ -33,11 +34,18 @@ public class FutsalOwnerController {
         return new ResponseEntity<>(savedFutsalOwner, HttpStatus.CREATED);
     }
 
+//    @Operation(description = "Futsal owner sign inr")
+//    @PostMapping("/futsal-owner/signin")
+//    public ResponseEntity<FutsalOwnerDto> futsalOwnerSignIn(@RequestBody SignInModel signInModel) throws IOException {
+//        FutsalOwnerDto futsalOwner=futsalOwnerService.SignIn(signInModel);
+//        return new ResponseEntity<>(futsalOwner, HttpStatus.OK);
+//    }
+
     @Operation(description = "Futsal owner sign inr")
     @PostMapping("/futsal-owner/signin")
-    public ResponseEntity<FutsalOwnerDto> futsalOwnerSignIn(@RequestBody SignInModel signInModel) throws IOException {
-        FutsalOwnerDto futsalOwner=futsalOwnerService.SignIn(signInModel);
-        return new ResponseEntity<>(futsalOwner, HttpStatus.OK);
+    public ResponseEntity<AuthenticationResponse> futsalOwnerSignIn(@RequestBody SignInModel signInModel) throws IOException {
+        AuthenticationResponse authenticationResponse=futsalOwnerService.authenticate(signInModel);
+        return new ResponseEntity<>(authenticationResponse, HttpStatus.OK);
     }
 
     @Operation(description = "Futsal Registration Request To Admin")

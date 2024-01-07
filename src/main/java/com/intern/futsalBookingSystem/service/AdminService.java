@@ -2,6 +2,7 @@ package com.intern.futsalBookingSystem.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.intern.futsalBookingSystem.dto.*;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,6 +11,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface AdminService {
+
+  AuthenticationResponse authenticate(SignInModel request);
 
 
  //  AdminDto signUp(AdminDto adminDto);

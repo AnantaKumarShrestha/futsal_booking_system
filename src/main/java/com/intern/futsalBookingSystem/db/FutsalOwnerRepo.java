@@ -21,4 +21,5 @@ public interface FutsalOwnerRepo extends JpaRepository<FutsalOwnerModel, UUID> {
 
     Optional<FutsalOwnerModel> findByUsernameAndPassword(String username, String password);
 
+    Optional<FutsalOwnerModel> findByUsername(String username);
 }

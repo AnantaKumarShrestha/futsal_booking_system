@@ -6,6 +6,7 @@ import com.intern.futsalBookingSystem.dto.SlotDto;
 import com.intern.futsalBookingSystem.dto.SlotsListDto;
 import com.intern.futsalBookingSystem.dto.UserDto;
 import com.intern.futsalBookingSystem.model.UserModel;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
+
+    AuthenticationResponse authenticate(SignInModel request);
 
 
     UserDto signUpUser(String user, MultipartFile file) throws IOException;

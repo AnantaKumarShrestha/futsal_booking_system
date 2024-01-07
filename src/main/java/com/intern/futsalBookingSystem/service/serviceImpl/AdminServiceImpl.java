@@ -14,7 +14,9 @@ import com.intern.futsalBookingSystem.model.AdminModel;
 import com.intern.futsalBookingSystem.model.FutsalModel;
 import com.intern.futsalBookingSystem.model.FutsalOwnerModel;
 import com.intern.futsalBookingSystem.model.UserModel;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
+import com.intern.futsalBookingSystem.security.JwtService;
 import com.intern.futsalBookingSystem.service.AdminService;
 import com.intern.futsalBookingSystem.service.AwsService;
 import com.intern.futsalBookingSystem.utils.MailUtils;
@@ -54,17 +56,23 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private JwtService jwtService;
+
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override
     public AdminDto signUp(String admin, MultipartFile photo) throws IOException {
 
         AdminModel adminModel= objectMapper.readValue(admin,AdminModel.class);
-        adminModel.setPhoto(awsService.uploadPhotoIntoAws(photo));
+    //    adminModel.setPhoto(awsService.uploadPhotoIntoAws(photo));
         AdminModel savedAdmin=adminRepo.save(adminModel);
         logger.info("Admin is signed up successfully");
-        savedAdmin.setPhoto(awsService.getPhotoFromAws(savedAdmin.getPhoto()));
+    //    savedAdmin.setPhoto(awsService.getPhotoFromAws(savedAdmin.getPhoto()));
         logger.info("Extracted admin photo from aws server successfully");
+        String jwtToken = jwtService.generateToken(adminModel);
+        System.out.println(jwtToken);
+//        var refreshToken = jwtService.generateRefreshToken(adminModel);
         return AdminMapper.INSTANCE.adminModelIntoAdminDto(savedAdmin);
 
     }
@@ -170,6 +178,18 @@ public class AdminServiceImpl implements AdminService {
         AdminModel admin=adminRepo.findByUsernameAndPassword(signInModel.getUsername(),signInModel.getPassword()).orElseThrow(()->new ResourceNotFoundException("Admin not found"));
         admin.setPhoto(awsService.getPhotoFromAws(admin.getPhoto()));
         return AdminMapper.INSTANCE.adminModelIntoAdminDto(admin);
+    }
+
+    @Override
+    public AuthenticationResponse authenticate(SignInModel request) {
+        AdminModel admin = adminRepo.findByUsername(request.getUsername())
+                .orElseThrow(()->new ResourceNotFoundException("User not Found"));
+        String jwtToken = jwtService.generateToken(admin);
+        String refreshToken = jwtService.generateRefreshToken(admin);
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .build();
     }
 
 }

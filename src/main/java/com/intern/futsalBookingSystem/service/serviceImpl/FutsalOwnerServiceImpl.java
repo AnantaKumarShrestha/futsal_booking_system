@@ -8,9 +8,11 @@ import com.intern.futsalBookingSystem.dto.*;
 import com.intern.futsalBookingSystem.exception.ResourceNotFoundException;
 import com.intern.futsalBookingSystem.mapper.*;
 import com.intern.futsalBookingSystem.model.*;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
+import com.intern.futsalBookingSystem.security.JwtService;
 import com.intern.futsalBookingSystem.service.FutsalOwnerService;
 import com.intern.futsalBookingSystem.utils.EmailWithAttachment;
 import com.intern.futsalBookingSystem.utils.PaymentPDF;
@@ -21,6 +23,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -62,6 +67,9 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private JwtService jwtService;
 
     private static final Logger logger = LoggerFactory.getLogger(FutsalOwnerServiceImpl.class);
     @Override
@@ -297,6 +305,18 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
             totalTurnover +=slot.getPrice();
         }
         return totalTurnover;
+    }
+
+    @Override
+    public AuthenticationResponse authenticate(SignInModel request) {
+        FutsalOwnerModel futsalOwner = futsalOwnerRepo.findByUsername(request.getUsername())
+                .orElseThrow(()->new ResourceNotFoundException("User not Found"));
+        String jwtToken = jwtService.generateToken(futsalOwner);
+        String refreshToken = jwtService.generateRefreshToken(futsalOwner);
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .build();
     }
 
 

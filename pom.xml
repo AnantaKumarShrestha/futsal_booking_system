@@ -5,8 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>3.1.4</version>
+		<relativePath/>
 	</parent>
 	<groupId>com.intern</groupId>
 	<artifactId>futsalBookingSystem</artifactId>
@@ -22,12 +22,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -82,6 +77,12 @@
 			<version>2.3.1</version> <!-- Use the latest version -->
 		</dependency>
 
+
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-core</artifactId>
+			<version>3.4.10</version> <!-- Use the latest version available -->
+		</dependency>
 		<!--		<dependency>-->
 		<!--			<groupId>software.amazon.awssdk</groupId>-->
 		<!--			<artifactId>s3</artifactId>-->
@@ -120,43 +121,49 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>5.5.1</version>
-		</dependency>
-
-
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.3</version>
-
 		</dependency>
 
 
 
 
 
-		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
+
+<!--		&lt;!&ndash; https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>io.jsonwebtoken</groupId>-->
+<!--			<artifactId>jjwt-api</artifactId>-->
+<!--			<version>0.11.5</version>-->
+<!--		</dependency>-->
+
+
+<!--		&lt;!&ndash; https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>io.jsonwebtoken</groupId>-->
+<!--			<artifactId>jjwt-impl</artifactId>-->
+<!--			<version>0.11.5</version>-->
+<!--			<scope>runtime</scope>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>io.jsonwebtoken</groupId>-->
+<!--			<artifactId>jjwt-jackson</artifactId> &lt;!&ndash; or jjwt-gson if Gson is preferred &ndash;&gt;-->
+<!--			<version>0.11.5</version>-->
+<!--			<scope>runtime</scope>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
 			<version>0.11.5</version>
 		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
 			<version>0.11.5</version>
-			<scope>runtime</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
+			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
-			<scope>runtime</scope>
 		</dependency>
 
 
@@ -165,6 +172,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>

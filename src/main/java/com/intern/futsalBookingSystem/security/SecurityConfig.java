@@ -1,73 +1,83 @@
 package com.intern.futsalBookingSystem.security;
 
-import lombok.Builder;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.Get;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.SecurityBuilder;
-import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.DefaultSecurityFilterChain;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import static com.amazonaws.services.cloudfront.util.SignerUtils.Protocol.http;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import javax.servlet.Filter;
+import java.util.Arrays;
 
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+import static org.springframework.http.HttpMethod.*;
+import static org.springframework.http.HttpMethod.DELETE;
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+@EnableReactiveMethodSecurity
+public class SecurityConfig{
+
+    private static final String[] WHITE_LIST_URL = {
+            "/user",
+            "/user/signin",
+            "/admin",
+            "/admin/signin",
+            "/futsal-owner",
+            "/futsal-owner/signin"
+          };
+//    private final JwtAuthenticationFilter jwtAuthFilter;
+//    private final AuthenticationProvider authenticationProvider;
 
     @Autowired
-    private UserModelUserDetailsService userDetailsService;
-
+    private JwtAuthenticationFilter jwtAuthFilter;
     @Autowired
-    private JwtAuthenticationEntryPoint authenticationEntryPoint;
-
-    @Autowired
-    private JwtAuthenticationFilter authenticationFilter;
+    private AuthenticationProvider authenticationProvider;
+   // private final LogoutHandler logoutHandler;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                        .authorizeHttpRequests(req ->
+                                req.requestMatchers(WHITE_LIST_URL)
+                                        .permitAll()
+                                        .requestMatchers("/admin/**").hasAuthority("admin")
+                                        .requestMatchers("/users/**").hasAuthority("user")
+                                        .requestMatchers( "/futsal-owner/**").hasAuthority("futsalOwner")
+                                        .anyRequest()
+                                        .authenticated()
+                        )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+//                .logout(logout ->
+//                        logout.logoutUrl("/api/v1/auth/logout")
+//                                .addLogoutHandler(logoutHandler)
+//                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+//                )
+        ;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/auth/user/**").permitAll()
-                .antMatchers("/auth/owner/**").permitAll()
-                .antMatchers("/user/**").hasAuthority("USER")
-                .antMatchers("/owner/**").hasAuthority("OWNER")
-                .anyRequest().authenticated()
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-     //   http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
     }
 
 

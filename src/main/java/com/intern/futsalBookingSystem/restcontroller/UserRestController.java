@@ -4,8 +4,10 @@ import com.intern.futsalBookingSystem.dto.FutsalListDto;
 import com.intern.futsalBookingSystem.dto.SlotDto;
 import com.intern.futsalBookingSystem.dto.SlotsListDto;
 import com.intern.futsalBookingSystem.dto.UserDto;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.service.UserService;
+import com.intern.futsalBookingSystem.service.serviceImpl.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,16 +27,25 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserServiceImpl userServiceimpl;
+
     @Operation(description = "User SignUp API")
     @PostMapping("/user")
     public UserDto signUpUser(@RequestParam("user") String user, @RequestParam("photo")MultipartFile file) throws IOException {
         return userService.signUpUser(user,file);
     }
 
+//    @Operation(description = "User SignIn API")
+//    @PostMapping("/user/signin")
+//    public UserDto UserSignIn(@RequestBody SignInModel signInModel)  {
+//        return userService.userSignIn(signInModel);
+//    }
+
     @Operation(description = "User SignIn API")
     @PostMapping("/user/signin")
-    public UserDto UserSignIn(@RequestBody SignInModel signInModel)  {
-        return userService.userSignIn(signInModel);
+    public AuthenticationResponse UserSignIn(@RequestBody SignInModel signInModel)  {
+        return userServiceimpl.authenticate(signInModel);
     }
 
     @Operation(description = "Get Available Futsal List")
