@@ -1,6 +1,5 @@
 package com.intern.futsalBookingSystem.service.serviceImpl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intern.futsalBookingSystem.db.FutsalRepo;
 import com.intern.futsalBookingSystem.db.SlotRepo;
@@ -19,13 +18,14 @@ import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.security.JwtService;
 import com.intern.futsalBookingSystem.service.AwsService;
 import com.intern.futsalBookingSystem.service.UserService;
+import com.intern.futsalBookingSystem.token.UserToken;
+import com.intern.futsalBookingSystem.token.UserTokenRepository;
+import com.intern.futsalBookingSystem.token.TokenType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -53,29 +53,28 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ObjectMapper objectMapper;
 
-//    @Autowired
-//    private TokenRepository tokenRepository;
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserTokenRepository userTokenRepository;
+
     @Autowired
     private JwtService jwtService;
 
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    @Transactional
     @Override
     public UserDto signUpUser(String user, MultipartFile file) throws IOException {
 
         UserModel userModel= objectMapper.readValue(user,UserModel.class);
 
-       // userModel.setPhoto(awsService.uploadPhotoIntoAws(file));
+        userModel.setPhoto(awsService.uploadPhotoIntoAws(file));
         UserModel savedUser=userRepo.save(userModel);
-        logger.info("User signed up successfully.");
-     //   savedUser.setPhoto(awsService.getPhotoFromAws(savedUser.getPhoto()));
-        logger.info("Extracted user photo from aws server successfully");
         var jwtToken = jwtService.generateToken(userModel);
+        saveUserToken(savedUser, jwtToken);
+        logger.info("User signed up successfully.");
+        savedUser.setPhoto(awsService.getPhotoFromAws(savedUser.getPhoto()));
+        logger.info("Extracted user photo from aws server successfully");
+
         System.out.println(jwtToken);
-        var refreshToken = jwtService.generateRefreshToken(userModel);
-        System.out.println("as "+refreshToken);
-//        saveUserToken(userModel, jwtToken);
         System.out.println("ko");
         return UserMapper.INSTANCE.userModelIntoUserDto(userModel);
 
@@ -173,10 +172,35 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(()->new ResourceNotFoundException("User not Found"));
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
+        revokeAllUserTokens(user);
+        saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
+    }
+
+
+    private void saveUserToken(UserModel user, String jwtToken) {
+        var token = UserToken.builder()
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .expired(false)
+                .revoked(false)
+                .build();
+        userTokenRepository.save(token);
+    }
+
+    private void revokeAllUserTokens(UserModel user) {
+        var validUserTokens = userTokenRepository.findAllValidTokenByUser(user.getId());
+        if (validUserTokens.isEmpty())
+            return;
+        validUserTokens.forEach(token -> {
+            token.setExpired(true);
+            token.setRevoked(true);
+        });
+        userTokenRepository.saveAll(validUserTokens);
     }
 
 

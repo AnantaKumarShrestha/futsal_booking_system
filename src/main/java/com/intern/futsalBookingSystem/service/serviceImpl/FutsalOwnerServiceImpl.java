@@ -14,6 +14,10 @@ import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
 import com.intern.futsalBookingSystem.security.JwtService;
 import com.intern.futsalBookingSystem.service.FutsalOwnerService;
+import com.intern.futsalBookingSystem.token.AdminToken;
+import com.intern.futsalBookingSystem.token.FutsalOwnerToken;
+import com.intern.futsalBookingSystem.token.FutsalOwnerTokenRepo;
+import com.intern.futsalBookingSystem.token.TokenType;
 import com.intern.futsalBookingSystem.utils.EmailWithAttachment;
 import com.intern.futsalBookingSystem.utils.PaymentPDF;
 import org.apache.poi.ss.usermodel.Row;
@@ -70,6 +74,9 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
 
     @Autowired
     private JwtService jwtService;
+
+    @Autowired
+    private FutsalOwnerTokenRepo futsalOwnerTokenRepo;
 
     private static final Logger logger = LoggerFactory.getLogger(FutsalOwnerServiceImpl.class);
     @Override
@@ -309,14 +316,25 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
 
     @Override
     public AuthenticationResponse authenticate(SignInModel request) {
-        FutsalOwnerModel futsalOwner = futsalOwnerRepo.findByUsername(request.getUsername())
-                .orElseThrow(()->new ResourceNotFoundException("User not Found"));
+        FutsalOwnerModel futsalOwner = futsalOwnerRepo.findByUsername(request.getUsername()).orElseThrow(()->new ResourceNotFoundException("Futsal Owner not Found"));
         String jwtToken = jwtService.generateToken(futsalOwner);
         String refreshToken = jwtService.generateRefreshToken(futsalOwner);
+        saveUserToken(futsalOwner,jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
+    }
+
+    private void saveUserToken(FutsalOwnerModel user, String jwtToken) {
+        var token = FutsalOwnerToken.builder()
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .expired(false)
+                .revoked(false)
+                .build();
+        futsalOwnerTokenRepo.save(token);
     }
 
 

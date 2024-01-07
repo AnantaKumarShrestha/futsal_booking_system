@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+
 @Data
 @Entity
 public class FutsalOwnerModel implements UserDetails {
@@ -45,6 +46,7 @@ public class FutsalOwnerModel implements UserDetails {
     @JoinColumn(name = "futsalId")
     private List<FutsalModel> futsals;
 
+    @Column(length = 1000)
    private String photo;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -19,6 +19,10 @@ import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.security.JwtService;
 import com.intern.futsalBookingSystem.service.AdminService;
 import com.intern.futsalBookingSystem.service.AwsService;
+import com.intern.futsalBookingSystem.token.AdminToken;
+import com.intern.futsalBookingSystem.token.AdminTokenRepo;
+import com.intern.futsalBookingSystem.token.TokenType;
+import com.intern.futsalBookingSystem.token.UserToken;
 import com.intern.futsalBookingSystem.utils.MailUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +62,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private JwtService jwtService;
+
+    @Autowired
+    private AdminTokenRepo adminTokenRepo;
 
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
@@ -182,14 +189,37 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public AuthenticationResponse authenticate(SignInModel request) {
-        AdminModel admin = adminRepo.findByUsername(request.getUsername())
-                .orElseThrow(()->new ResourceNotFoundException("User not Found"));
+        AdminModel admin = adminRepo.findByUsername(request.getUsername()).orElseThrow(()->new ResourceNotFoundException("Admin not Found"));
         String jwtToken = jwtService.generateToken(admin);
         String refreshToken = jwtService.generateRefreshToken(admin);
+        saveUserToken(admin,jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
     }
+    private void saveUserToken(AdminModel user, String jwtToken) {
+        var token = AdminToken.builder()
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .expired(false)
+                .revoked(false)
+                .build();
+        adminTokenRepo.save(token);
+    }
+
+//    private void revokeAllUserTokens(AdminModel user) {
+//        var validUserTokens = adminTokenRepo.findAllValidTokenByUser(user.getId());
+//        if (validUserTokens.isEmpty())
+//            return;
+//        validUserTokens.forEach(token -> {
+//            token.setExpired(true);
+//            token.setRevoked(true);
+//        });
+//        adminTokenRepo.saveAll(validUserTokens);
+//    }
+//
+
 
 }

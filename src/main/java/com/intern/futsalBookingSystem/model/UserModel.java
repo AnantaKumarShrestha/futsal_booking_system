@@ -48,7 +48,7 @@ public class UserModel implements UserDetails {
     private AddressModel address;
 
     private int rewardPoint;
-
+    @Column(length = 1000)
     private String photo;
 
     @Override

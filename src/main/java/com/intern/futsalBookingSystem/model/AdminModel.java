@@ -49,10 +49,7 @@ public class AdminModel implements UserDetails{
     @Convert(converter = EncryptorDecryptor.class)
     private String password;
 
-//    @Enumerated(EnumType.STRING)
-//    @Column(nullable = false, length = 5)
-//    private Role role;
-
+    @Column(length = 1000)
     private String photo;
 
     @Override
