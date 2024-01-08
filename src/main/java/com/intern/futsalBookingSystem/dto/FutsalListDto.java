@@ -27,7 +27,10 @@ public class FutsalListDto {
 
     private String photo;
 
-    //   private String photo;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private int rating;
+
+
 
 
 

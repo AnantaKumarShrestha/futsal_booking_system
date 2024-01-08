@@ -2,6 +2,7 @@ package com.intern.futsalBookingSystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
@@ -10,6 +11,7 @@ import java.util.UUID;
 @NamedQuery(name = "getAllFutsal",query = "SELECT f FROM FutsalModel f")
 @NamedQuery(name = "getFutsalBySlotId", query = "SELECT f FROM FutsalModel f JOIN f.slots s WHERE s.id = :slotId")
 @Data
+@NoArgsConstructor
 @Entity
 public class FutsalModel {
 
@@ -32,11 +34,24 @@ public class FutsalModel {
 
     private boolean isRegistered;
 
- //   private String photo;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<SlotModel> slots;
 
     @Column(length = 1000)
     private String photo;
+
+    @OneToMany(mappedBy = "futsal", cascade = CascadeType.ALL)
+    private List<RatingModel> ratings;
+
+    public FutsalModel(UUID id, String futsalName, String futsalLocation, String futsalDescription, FutsalOwnerModel futsalOwner, boolean isRegistered, String photo) {
+        this.id=id;
+        this.futsalName=futsalName;
+        this.futsalLocation=futsalLocation;
+        this.futsalDescription=futsalDescription;
+        this.futsalOwner=futsalOwner;
+        this.isRegistered=isRegistered;
+        this.photo=photo;
+    }
+
 }

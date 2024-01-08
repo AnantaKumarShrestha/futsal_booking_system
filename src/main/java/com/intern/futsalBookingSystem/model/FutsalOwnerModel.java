@@ -6,7 +6,7 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import lombok.NoArgsConstructor;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +14,7 @@ import java.util.UUID;
 
 
 @Data
+@NoArgsConstructor
 @Entity
 public class FutsalOwnerModel implements UserDetails {
 
@@ -48,6 +49,20 @@ public class FutsalOwnerModel implements UserDetails {
 
     @Column(length = 1000)
    private String photo;
+
+
+    public FutsalOwnerModel(UUID id, String firstName, String lastname, String username, String password, String gmail, String phoneNumber, List<FutsalModel> futsals, String photo) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastname;
+        this.username = username;
+        this.password = password;
+        this.gmail = gmail;
+        this.phoneNumber = phoneNumber;
+        this.futsals = futsals;
+        this.photo = photo;
+    };
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority("futsalOwner"));

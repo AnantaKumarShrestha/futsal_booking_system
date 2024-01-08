@@ -24,6 +24,7 @@ import com.intern.futsalBookingSystem.token.AdminTokenRepo;
 import com.intern.futsalBookingSystem.token.TokenType;
 import com.intern.futsalBookingSystem.token.UserToken;
 import com.intern.futsalBookingSystem.utils.MailUtils;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,14 +73,14 @@ public class AdminServiceImpl implements AdminService {
     public AdminDto signUp(String admin, MultipartFile photo) throws IOException {
 
         AdminModel adminModel= objectMapper.readValue(admin,AdminModel.class);
-    //    adminModel.setPhoto(awsService.uploadPhotoIntoAws(photo));
+        adminModel.setPhoto(awsService.uploadPhotoIntoAws(photo));
         AdminModel savedAdmin=adminRepo.save(adminModel);
         logger.info("Admin is signed up successfully");
-    //    savedAdmin.setPhoto(awsService.getPhotoFromAws(savedAdmin.getPhoto()));
+        savedAdmin.setPhoto(awsService.getPhotoFromAws(savedAdmin.getPhoto()));
         logger.info("Extracted admin photo from aws server successfully");
         String jwtToken = jwtService.generateToken(adminModel);
         System.out.println(jwtToken);
-//        var refreshToken = jwtService.generateRefreshToken(adminModel);
+        var refreshToken = jwtService.generateRefreshToken(adminModel);
         return AdminMapper.INSTANCE.adminModelIntoAdminDto(savedAdmin);
 
     }
@@ -150,7 +151,7 @@ public class AdminServiceImpl implements AdminService {
     public void removeFutsal(UUID futsalId) {
 
        FutsalModel futsal=futsalRepo.findById(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal not found"));
-       awsService.deletePhotoInAwsServer(futsal.getPhoto());
+      // awsService.deletePhotoInAwsServer(futsal.getPhoto());
        logger.info("Futsal photo has been deleted from aws server successfully");
        futsalRepo.delete(futsal);
        logger.info("Futsal is removed from database successfully");
@@ -209,17 +210,6 @@ public class AdminServiceImpl implements AdminService {
         adminTokenRepo.save(token);
     }
 
-//    private void revokeAllUserTokens(AdminModel user) {
-//        var validUserTokens = adminTokenRepo.findAllValidTokenByUser(user.getId());
-//        if (validUserTokens.isEmpty())
-//            return;
-//        validUserTokens.forEach(token -> {
-//            token.setExpired(true);
-//            token.setRevoked(true);
-//        });
-//        adminTokenRepo.saveAll(validUserTokens);
-//    }
-//
 
 
 }

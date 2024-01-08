@@ -18,7 +18,6 @@ public class SlotModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private UserModel bookedByUser;
 

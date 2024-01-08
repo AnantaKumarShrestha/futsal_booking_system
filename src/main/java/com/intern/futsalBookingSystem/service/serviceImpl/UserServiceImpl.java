@@ -21,11 +21,11 @@ import com.intern.futsalBookingSystem.service.UserService;
 import com.intern.futsalBookingSystem.token.UserToken;
 import com.intern.futsalBookingSystem.token.UserTokenRepository;
 import com.intern.futsalBookingSystem.token.TokenType;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -166,7 +166,7 @@ public class UserServiceImpl implements UserService {
         return UserMapper.INSTANCE.userModelIntoUserDto(user);
     }
 
-
+@Override
     public AuthenticationResponse authenticate(SignInModel request) {
         UserModel user = userRepo.findByEmail(request.getUsername())
                 .orElseThrow(()->new ResourceNotFoundException("User not Found"));

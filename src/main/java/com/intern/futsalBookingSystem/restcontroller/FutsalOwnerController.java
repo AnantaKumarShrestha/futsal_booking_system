@@ -34,12 +34,6 @@ public class FutsalOwnerController {
         return new ResponseEntity<>(savedFutsalOwner, HttpStatus.CREATED);
     }
 
-//    @Operation(description = "Futsal owner sign inr")
-//    @PostMapping("/futsal-owner/signin")
-//    public ResponseEntity<FutsalOwnerDto> futsalOwnerSignIn(@RequestBody SignInModel signInModel) throws IOException {
-//        FutsalOwnerDto futsalOwner=futsalOwnerService.SignIn(signInModel);
-//        return new ResponseEntity<>(futsalOwner, HttpStatus.OK);
-//    }
 
     @Operation(description = "Futsal owner sign inr")
     @PostMapping("/futsal-owner/signin")

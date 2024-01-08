@@ -1,5 +1,6 @@
 package com.intern.futsalBookingSystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.intern.futsalBookingSystem.enums.Gender;
 import com.intern.futsalBookingSystem.enums.Role;
 import jakarta.persistence.*;
@@ -34,9 +35,11 @@ public class AdminDto {
     private String gmail;
 
     @Column(nullable = false, length = 120)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String username;
 
     @Column(nullable = false, length = 120)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String password;
 
     @Enumerated(EnumType.STRING)

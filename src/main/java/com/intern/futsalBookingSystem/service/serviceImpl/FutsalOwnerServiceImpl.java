@@ -1,7 +1,5 @@
 package com.intern.futsalBookingSystem.service.serviceImpl;
 
-import com.amazonaws.services.dynamodbv2.xspec.M;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intern.futsalBookingSystem.db.*;
 import com.intern.futsalBookingSystem.dto.*;
@@ -14,7 +12,6 @@ import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
 import com.intern.futsalBookingSystem.security.JwtService;
 import com.intern.futsalBookingSystem.service.FutsalOwnerService;
-import com.intern.futsalBookingSystem.token.AdminToken;
 import com.intern.futsalBookingSystem.token.FutsalOwnerToken;
 import com.intern.futsalBookingSystem.token.FutsalOwnerTokenRepo;
 import com.intern.futsalBookingSystem.token.TokenType;
@@ -27,16 +24,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -181,6 +175,7 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
     }
 
     @Override
+    @Transactional
     public SlotDto completeBooking(UUID slotId) throws IOException {
         SlotModel slot = slotRepo.getSlotById(slotId).orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
 
@@ -202,6 +197,8 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
                 invoiceModel.setPrice((int) slot.getPrice());
                 invoiceModel.setGameStartTime(String.valueOf(slot.getStartTime()));
                 invoiceModel.setGameEndTime(String.valueOf(slot.getEndTime()));
+                LocalDate date= LocalDate.now();
+                invoiceModel.setDate(String.valueOf(date));
 
                 InvoiceModel savedInvoice=invoiceRepo.save(invoiceModel);
                 String invoiceId= String.valueOf(savedInvoice.getInvoiceId());
@@ -210,8 +207,7 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
                 String price= String.valueOf(slot.getPrice());
                 String sslotId= String.valueOf(slot.getId());
 
-                LocalDateTime date=LocalDateTime.now();
-                invoiceModel.setDate(String.valueOf(date));
+
 
                 byte[] bytes=paymentPDF.asByteInvoice(futsal.getFutsalName(),futsal.getFutsalLocation(),invoiceId ,invoiceModel.getCustomerName(),sslotId,startTime,endTime,price);
                 emailWithAttachment.sendEmailWithAttachment(userEmail,"Invoice","Bill",bytes,"invoice.pdf");
@@ -240,7 +236,6 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
     @Override
     public List<InvoiceDto> invoiceExcelFile(UUID futsalId) {
 
-       // FutsalModel futsal=futsalRepo.getFutsalById(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal Not found"));
         FutsalOwnerModel futsalOwner=futsalOwnerRepo.findByFutsals_Id(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal Not Found"));
         List<InvoiceModel> data = invoiceRepo.findAllByFutsalId(futsalId);
         String subject="Futsal Statement";
