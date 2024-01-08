@@ -2,12 +2,15 @@ package com.intern.futsalBookingSystem.model;
 
 import com.intern.futsalBookingSystem.encryption.EncryptorDecryptor;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
 
 @Data
+@NoArgsConstructor
 @Entity
 public class FutsalOwnerModel {
 
@@ -41,5 +44,16 @@ public class FutsalOwnerModel {
     private List<FutsalModel> futsals;
 
    private String photo;
+    public FutsalOwnerModel(UUID id, String firstName, String lastname, String username, String password, String gmail, String phoneNumber, List<FutsalModel> futsals, String photo) {
+        this.id=id;
+        this.firstName=firstName;
+        this.lastName=lastname;
+        this.username=username;
+        this.password=password;
+        this.gmail=gmail;
+        this.phoneNumber=phoneNumber;
+        this.futsals=futsals;
+        this.photo=photo;
+    }
 
 }
