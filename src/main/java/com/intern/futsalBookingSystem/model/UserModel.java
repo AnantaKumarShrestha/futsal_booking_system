@@ -36,7 +36,6 @@ public class UserModel {
     @Column(nullable = false,unique = true)
     @Convert(converter = EncryptorDecryptor.class)
     @UniqueEmail
- //   @Unique()
     private String email;
 
     @Column(nullable = false, length = 50)

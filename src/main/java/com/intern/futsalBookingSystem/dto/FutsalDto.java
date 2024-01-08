@@ -27,7 +27,6 @@ public class FutsalDto {
 
     private boolean isRegistered;
 
-    //   private String photo;
 
     private List<SlotModel> slots;
 
