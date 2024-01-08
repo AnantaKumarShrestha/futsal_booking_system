@@ -16,7 +16,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({DataIntegrityViolationException.class,ResourceNotFoundException.class})
+    @ExceptionHandler({ResourceNotFoundException.class})
     public ResponseEntity<ApiResponse> resourceNotFoundExceptionHandler(RuntimeException e){
         String message=e.getMessage();
         ApiResponse apiResponse=new ApiResponse(message,Status.FAIL);
@@ -34,4 +34,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(resp,HttpStatus.BAD_REQUEST);
     }
 
+
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiResponse> duplicateEmailFoundExceptionHandler(RuntimeException e){
+        String message="Duplicate email";
+        ApiResponse apiResponse=new ApiResponse(message,Status.FAIL);
+        return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+    }
 }

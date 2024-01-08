@@ -1,9 +1,8 @@
 package com.intern.futsalBookingSystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.intern.futsalBookingSystem.model.AddressModel;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
+import com.intern.futsalBookingSystem.validator.UniqueEmail;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,8 +20,11 @@ public class UserDto {
 
     private int age;
 
+    @UniqueEmail
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String email;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String password;
 
     private String gmail;

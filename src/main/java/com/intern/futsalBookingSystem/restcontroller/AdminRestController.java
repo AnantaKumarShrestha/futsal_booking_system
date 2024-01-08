@@ -7,6 +7,7 @@ import com.intern.futsalBookingSystem.payload.ApiResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.service.AdminService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class AdminRestController {
 
     @Operation(description = "Admin SignUp API")
     @PostMapping("/admin")
-    public ResponseEntity<AdminDto> createAdmin(@RequestParam("admin") String admin,@RequestParam("photo") MultipartFile file) throws IOException {
+    public ResponseEntity<AdminDto> createAdmin(@RequestParam("admin") @Valid String admin, @RequestParam("photo") MultipartFile file) throws IOException {
         AdminDto savedAdmin=adminService.signUp(admin,file);
         return new ResponseEntity<>(savedAdmin, HttpStatus.CREATED);
     }

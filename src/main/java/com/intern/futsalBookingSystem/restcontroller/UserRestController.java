@@ -4,9 +4,14 @@ import com.intern.futsalBookingSystem.dto.FutsalListDto;
 import com.intern.futsalBookingSystem.dto.SlotDto;
 import com.intern.futsalBookingSystem.dto.SlotsListDto;
 import com.intern.futsalBookingSystem.dto.UserDto;
+import com.intern.futsalBookingSystem.model.RatingModel;
+import com.intern.futsalBookingSystem.payload.ApiResponse;
+import com.intern.futsalBookingSystem.payload.RatingPayload;
 import com.intern.futsalBookingSystem.payload.SignInModel;
+import com.intern.futsalBookingSystem.service.RatingService;
 import com.intern.futsalBookingSystem.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +30,12 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RatingService ratingService;
+
     @Operation(description = "User SignUp API")
     @PostMapping("/user")
-    public UserDto signUpUser(@RequestParam("user") String user, @RequestParam("photo")MultipartFile file) throws IOException {
+    public UserDto signUpUser(@RequestParam("user") @Valid String user, @RequestParam("photo")MultipartFile file) throws IOException {
         return userService.signUpUser(user,file);
     }
 
@@ -77,5 +85,12 @@ public class UserRestController {
     public List<SlotsListDto> getOwnBookings(@PathVariable("userId") UUID userId){
         return userService.getOwnBookings(userId);
     }
+
+    @Operation(description = "Give rating to futsal")
+    @GetMapping("/users/futsals/rating")
+    public ApiResponse giveRatingToFutsal(@RequestBody RatingPayload ratingPayload){
+        return ratingService.submitRating(ratingPayload);
+    }
+
 
 }

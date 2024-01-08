@@ -12,7 +12,6 @@ import java.util.UUID;
 public interface AdminService {
 
 
- //  AdminDto signUp(AdminDto adminDto);
  AdminDto signUp(String adminDto, MultipartFile file) throws IOException;
 
    List<FutsalListDto> getFutsalRegistrationRequestList();

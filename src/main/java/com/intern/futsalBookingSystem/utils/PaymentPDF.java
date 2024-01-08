@@ -27,11 +27,10 @@ public class PaymentPDF {
 
         PDPage mypage = docs.getPage(0);
 
-        //Prepare Content Stream
+
         PDPageContentStream cs = new PDPageContentStream(docs, mypage);
 
-        //Writing Single Line text
-        //Writing the Invoice title
+
         cs.beginText();
         cs.setFont(PDType1Font.TIMES_ROMAN, 22);
         cs.newLineAtOffset(250, 735);
@@ -62,8 +61,6 @@ public class PaymentPDF {
         cs.showText("NO : "+InvoiceNumber);
         cs.endText();
 
-        //Writing Multiple Lines
-        //writing the customer details
         cs.beginText();
         cs.setFont(PDType1Font.TIMES_ROMAN, 14);
         cs.setLeading(20f);
@@ -79,7 +76,6 @@ public class PaymentPDF {
         cs.showText(customerName);
         cs.endText();
 
-        //========================================================================================
 
         cs.beginText();
         cs.setFont(PDType1Font.TIMES_ROMAN, 14);
@@ -106,8 +102,6 @@ public class PaymentPDF {
         cs.newLineAtOffset(80, 530);
         cs.endText();
 
-
-        //=========================================================================================
 
         cs.beginText();
         cs.setFont(PDType1Font.TIMES_ROMAN, 14);

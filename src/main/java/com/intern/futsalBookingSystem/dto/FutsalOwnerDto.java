@@ -1,5 +1,6 @@
 package com.intern.futsalBookingSystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.intern.futsalBookingSystem.model.FutsalModel;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -22,8 +23,10 @@ public class FutsalOwnerDto {
 
     private String lastName;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String username;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String password;
 
     private String gmail;
@@ -32,6 +35,5 @@ public class FutsalOwnerDto {
 
     private String photo;
 
-  //  private List<FutsalModel> futsals;
 
 }
