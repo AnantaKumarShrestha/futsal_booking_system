@@ -3,18 +3,21 @@ package com.intern.futsalBookingSystem.model;
 
 import com.intern.futsalBookingSystem.encryption.EncryptorDecryptor;
 import com.intern.futsalBookingSystem.enums.Gender;
-import com.intern.futsalBookingSystem.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import lombok.NoArgsConstructor;
-
+import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @Entity
-public class AdminModel {
+public class AdminModel implements UserDetails{
 
 
     @Id
@@ -48,10 +51,7 @@ public class AdminModel {
     @Convert(converter = EncryptorDecryptor.class)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 5)
-    private Role role;
-
+    @Column(length = 1000)
     private String photo;
     public AdminModel(UUID id, String firstName, String lastName, String username, String password, String gmail,int age,String phone,String photo) {
         this.id=id;
@@ -65,4 +65,28 @@ public class AdminModel {
         this.photo=photo;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority("admin"));
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

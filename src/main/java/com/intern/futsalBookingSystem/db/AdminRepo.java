@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface AdminRepo extends JpaRepository<AdminModel, UUID> {
 
     Optional<AdminModel> findByUsernameAndPassword(String username, String password);
+
+    Optional<AdminModel> findByUsername(String username);
 }

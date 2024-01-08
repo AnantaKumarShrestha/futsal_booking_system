@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.intern.futsalBookingSystem.dto.*;
 import com.intern.futsalBookingSystem.enums.Status;
 import com.intern.futsalBookingSystem.payload.ApiResponse;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.service.AdminService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,7 +26,6 @@ public class AdminRestController {
     private AdminService adminService;
 
 
-    //========================================================================
 
     @Operation(description = "Admin SignUp API")
     @PostMapping("/admin")
@@ -34,13 +34,13 @@ public class AdminRestController {
         return new ResponseEntity<>(savedAdmin, HttpStatus.CREATED);
     }
 
+
     @Operation(description = "Admin SignIn")
     @PostMapping("/admin/signin")
-    public ResponseEntity<AdminDto> adminSignIn(@RequestBody SignInModel signInModel) {
-        AdminDto admin=adminService.signIn(signInModel);
-        return new ResponseEntity<>(admin, HttpStatus.OK);
+    public ResponseEntity<AuthenticationResponse> adminSignIn(@RequestBody SignInModel signInModel) {
+        AuthenticationResponse authenticationResponse=adminService.authenticate(signInModel);
+        return new ResponseEntity<>(authenticationResponse, HttpStatus.OK);
     }
-    //===================================================================
 
     @Operation(description = "Get Registered Futsal List")
     @GetMapping("/admin/futsals")

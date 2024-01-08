@@ -34,11 +34,11 @@ public class FutsalModel {
 
     private boolean isRegistered;
 
- //   private String photo;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<SlotModel> slots;
 
+    @Column(length = 1000)
     private String photo;
 
     @OneToMany(mappedBy = "futsal", cascade = CascadeType.ALL)

@@ -5,6 +5,7 @@ import com.intern.futsalBookingSystem.dto.*;
 import com.intern.futsalBookingSystem.mapper.FutsalListMapper;
 import com.intern.futsalBookingSystem.model.FutsalOwnerModel;
 import com.intern.futsalBookingSystem.model.InvoiceModel;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
@@ -16,6 +17,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface FutsalOwnerService {
+
+    AuthenticationResponse authenticate(SignInModel request);
 
 
 

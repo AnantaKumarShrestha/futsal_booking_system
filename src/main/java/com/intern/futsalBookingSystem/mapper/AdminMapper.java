@@ -4,7 +4,6 @@ import com.intern.futsalBookingSystem.dto.AdminDto;
 import com.intern.futsalBookingSystem.model.AdminModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 @Mapper

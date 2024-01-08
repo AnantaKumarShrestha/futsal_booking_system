@@ -14,9 +14,15 @@ import com.intern.futsalBookingSystem.model.AdminModel;
 import com.intern.futsalBookingSystem.model.FutsalModel;
 import com.intern.futsalBookingSystem.model.FutsalOwnerModel;
 import com.intern.futsalBookingSystem.model.UserModel;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
+import com.intern.futsalBookingSystem.security.JwtService;
 import com.intern.futsalBookingSystem.service.AdminService;
 import com.intern.futsalBookingSystem.service.AwsService;
+import com.intern.futsalBookingSystem.token.AdminToken;
+import com.intern.futsalBookingSystem.token.AdminTokenRepo;
+import com.intern.futsalBookingSystem.token.TokenType;
+import com.intern.futsalBookingSystem.token.UserToken;
 import com.intern.futsalBookingSystem.utils.MailUtils;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -55,6 +61,12 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private AdminTokenRepo adminTokenRepo;
+
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override
@@ -62,10 +74,13 @@ public class AdminServiceImpl implements AdminService {
 
         AdminModel adminModel= objectMapper.readValue(admin,AdminModel.class);
         adminModel.setPhoto(awsService.uploadPhotoIntoAws(photo));
-        AdminModel savedAdmin = adminRepo.save(adminModel);
+        AdminModel savedAdmin=adminRepo.save(adminModel);
         logger.info("Admin is signed up successfully");
         savedAdmin.setPhoto(awsService.getPhotoFromAws(savedAdmin.getPhoto()));
         logger.info("Extracted admin photo from aws server successfully");
+        String jwtToken = jwtService.generateToken(adminModel);
+        System.out.println(jwtToken);
+        var refreshToken = jwtService.generateRefreshToken(adminModel);
         return AdminMapper.INSTANCE.adminModelIntoAdminDto(savedAdmin);
 
     }
@@ -172,5 +187,29 @@ public class AdminServiceImpl implements AdminService {
         admin.setPhoto(awsService.getPhotoFromAws(admin.getPhoto()));
         return AdminMapper.INSTANCE.adminModelIntoAdminDto(admin);
     }
+
+    @Override
+    public AuthenticationResponse authenticate(SignInModel request) {
+        AdminModel admin = adminRepo.findByUsername(request.getUsername()).orElseThrow(()->new ResourceNotFoundException("Admin not Found"));
+        String jwtToken = jwtService.generateToken(admin);
+        String refreshToken = jwtService.generateRefreshToken(admin);
+        saveUserToken(admin,jwtToken);
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .build();
+    }
+    private void saveUserToken(AdminModel user, String jwtToken) {
+        var token = AdminToken.builder()
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .expired(false)
+                .revoked(false)
+                .build();
+        adminTokenRepo.save(token);
+    }
+
+
 
 }

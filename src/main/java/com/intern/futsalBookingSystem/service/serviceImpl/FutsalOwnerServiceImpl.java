@@ -1,17 +1,20 @@
 package com.intern.futsalBookingSystem.service.serviceImpl;
 
-import com.amazonaws.services.dynamodbv2.xspec.M;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intern.futsalBookingSystem.db.*;
 import com.intern.futsalBookingSystem.dto.*;
 import com.intern.futsalBookingSystem.exception.ResourceNotFoundException;
 import com.intern.futsalBookingSystem.mapper.*;
 import com.intern.futsalBookingSystem.model.*;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.payload.SlotRequest;
 import com.intern.futsalBookingSystem.payload.TurnOverStats;
+import com.intern.futsalBookingSystem.security.JwtService;
 import com.intern.futsalBookingSystem.service.FutsalOwnerService;
+import com.intern.futsalBookingSystem.token.FutsalOwnerToken;
+import com.intern.futsalBookingSystem.token.FutsalOwnerTokenRepo;
+import com.intern.futsalBookingSystem.token.TokenType;
 import com.intern.futsalBookingSystem.utils.EmailWithAttachment;
 import com.intern.futsalBookingSystem.utils.PaymentPDF;
 import org.apache.poi.ss.usermodel.Row;
@@ -24,9 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -65,9 +66,14 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private FutsalOwnerTokenRepo futsalOwnerTokenRepo;
+
     private static final Logger logger = LoggerFactory.getLogger(FutsalOwnerServiceImpl.class);
     @Override
-  //  @Transactional
     public FutsalOwnerDto signUpFutsalOwner(String futsalOwner, MultipartFile photo) throws IOException {
         FutsalOwnerModel futsalOwnerModel=objectMapper.readValue(futsalOwner,FutsalOwnerModel.class);
         futsalOwnerModel.setPhoto(awsService.uploadPhotoIntoAws(photo));
@@ -230,7 +236,6 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
     @Override
     public List<InvoiceDto> invoiceExcelFile(UUID futsalId) {
 
-       // FutsalModel futsal=futsalRepo.getFutsalById(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal Not found"));
         FutsalOwnerModel futsalOwner=futsalOwnerRepo.findByFutsals_Id(futsalId).orElseThrow(()->new ResourceNotFoundException("Futsal Not Found"));
         List<InvoiceModel> data = invoiceRepo.findAllByFutsalId(futsalId);
         String subject="Futsal Statement";
@@ -302,6 +307,29 @@ public class FutsalOwnerServiceImpl implements FutsalOwnerService {
             totalTurnover +=slot.getPrice();
         }
         return totalTurnover;
+    }
+
+    @Override
+    public AuthenticationResponse authenticate(SignInModel request) {
+        FutsalOwnerModel futsalOwner = futsalOwnerRepo.findByUsername(request.getUsername()).orElseThrow(()->new ResourceNotFoundException("Futsal Owner not Found"));
+        String jwtToken = jwtService.generateToken(futsalOwner);
+        String refreshToken = jwtService.generateRefreshToken(futsalOwner);
+        saveUserToken(futsalOwner,jwtToken);
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .build();
+    }
+
+    private void saveUserToken(FutsalOwnerModel user, String jwtToken) {
+        var token = FutsalOwnerToken.builder()
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .expired(false)
+                .revoked(false)
+                .build();
+        futsalOwnerTokenRepo.save(token);
     }
 
 

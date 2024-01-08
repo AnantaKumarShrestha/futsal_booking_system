@@ -1,11 +1,9 @@
 package com.intern.futsalBookingSystem.mapper;
 
 import com.intern.futsalBookingSystem.dto.FutsalOwnerDto;
-import com.intern.futsalBookingSystem.model.FutsalModel;
 import com.intern.futsalBookingSystem.model.FutsalOwnerModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;

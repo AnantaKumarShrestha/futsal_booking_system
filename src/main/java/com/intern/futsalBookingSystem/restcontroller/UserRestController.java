@@ -4,12 +4,13 @@ import com.intern.futsalBookingSystem.dto.FutsalListDto;
 import com.intern.futsalBookingSystem.dto.SlotDto;
 import com.intern.futsalBookingSystem.dto.SlotsListDto;
 import com.intern.futsalBookingSystem.dto.UserDto;
-import com.intern.futsalBookingSystem.model.RatingModel;
+import com.intern.futsalBookingSystem.payload.AuthenticationResponse;
 import com.intern.futsalBookingSystem.payload.ApiResponse;
 import com.intern.futsalBookingSystem.payload.RatingPayload;
 import com.intern.futsalBookingSystem.payload.SignInModel;
 import com.intern.futsalBookingSystem.service.RatingService;
 import com.intern.futsalBookingSystem.service.UserService;
+import com.intern.futsalBookingSystem.service.serviceImpl.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,9 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
-    @Autowired
+
     private RatingService ratingService;
+
 
     @Operation(description = "User SignUp API")
     @PostMapping("/user")
@@ -39,10 +41,11 @@ public class UserRestController {
         return userService.signUpUser(user,file);
     }
 
+
     @Operation(description = "User SignIn API")
     @PostMapping("/user/signin")
-    public UserDto UserSignIn(@RequestBody SignInModel signInModel)  {
-        return userService.userSignIn(signInModel);
+    public AuthenticationResponse UserSignIn(@RequestBody SignInModel signInModel)  {
+        return userService.authenticate(signInModel);
     }
 
     @Operation(description = "Get Available Futsal List")

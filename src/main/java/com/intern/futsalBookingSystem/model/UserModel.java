@@ -6,8 +6,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Collection;
+import java.util.Collections;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -16,7 +20,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class UserModel {
+public class UserModel implements UserDetails {
 
 
     @Id
@@ -49,11 +53,43 @@ public class UserModel {
     private AddressModel address;
 
     private int rewardPoint;
-
+    @Column(length = 1000)
     private String photo;
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority("user"));
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<RatingModel> ratings;
+
     public UserModel(UUID id,String firstName, String lasName, int age, String email, String password, String gmail,AddressModel address,int rewardPoint,String photo) {
         this.id=id;
         this.firstName=firstName;
@@ -65,5 +101,6 @@ public class UserModel {
         this.address=address;
         this.rewardPoint=rewardPoint;
         this.photo=photo;
+
     }
 }
