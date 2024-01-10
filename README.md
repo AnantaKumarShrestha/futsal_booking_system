@@ -1,17 +1,38 @@
-The main purpose of my Java-Project is to make users easy to book futsal.
-1) User, Futsal-Owner, Admin can signup, sign in and logout 
-2) Users can book futsal, cancel futsal, see the list of futsals.
-3) Admins can see the list of users, futsalOwners and futsals which are registred in the application.
-4) Futsal Owners have to send the Futsal Registration Request to Admin to register futsal.
-5) Admins have the authority to accept and reject the futsal registration request, which is sent by the futsal Owner.
+# Futsal Booking System
 
-Strategy of git pull request 
-Most of the time I have created new branches for every new feature. After completing the feature, I pushed code into Github and created Pull-Requests to merge in the main branch, and after merging the feature branch in the main branch in Github then I pull the code in the local git main branch to update the local main branch.
+## Project Overview
 
-Challanges while making project
+The primary objective of this Java project is to simplify the process of booking futsal.
 
-Most of the time I have created the git branch in a linear way, so I didnt face Challange while merging, but I have created the jwt_feature branch at the middle of the project and worked a lot in that branch. So while merging, that branch Main was merged with many Git-Branches, so there was a Merge-Conflict
+### User, Futsal Owner, Admin Authentication
 
-Overcomed the challanges
+- Users, Futsal Owners, and Admins can easly sign up, sign in, and log out of the system.
 
-So I overcomed that Challange by pulling the main branch of cloud into the local main branch and merging the jwt_feature branch in the main branch and removed the merge conflict. After merging the jwt_feature.I have pushed the code into Github and created a Pull-Request and merged the jwt_feature branch in the main branch.
+### User Functionality
+
+- Users are able to book futsal slots, cancel bookings, and access a list of available futsals slots.
+
+### Admin Authority
+
+- Admins have the ability to view lists of users, futsal owners, and futsals which are registered in the application.
+
+### Futsal Owner Registration Workflow
+
+- Futsal Owners have to send the futsal registration request to the Admin for approval.
+
+### Admin Approval Process
+
+- Admins have the ability to accept or reject futsal registration requests submitted by Futsal Owners.
+
+## Git Pull Request Strategy
+
+For the most part, I've done in a linear approach by creating new branches for each feature. This helped me to easy to code without effecting the main branch .Once the feature is completed.I pushed the branch to GitHub. Created a pull request to merge with main branch.After merging the feature branch into main branch in github. I update the local main branch by pulling the latest changes from the GitHub.
+
+## Challenges Faced
+
+While the most of the time I worked on linear branching strategy,In the middle of the project I have created a 'jwt_feature' branch which I worked alot. While merging the 'jwt_feature' branch there was a merge conflict becouse at that time 'main' branch was merged with another branche.
+
+## Overcoming Challenges
+
+To tackle this challenge, I resolved the Merge Conflict by pulling the main branch of GitHub into the local main branch. Then 'jwt_feature' branch was merged with main branch, and conflicts were successfully resolved by removing unnecessary code then I pushed into GitHub, and creted a Pull Request,and merged 'jwt_feature' branch into the main branch.
+
